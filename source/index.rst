@@ -10,6 +10,7 @@ Welcome to ML Mitschriften's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   Notationen <notation>
    Maschinelearning Typen <mltypes>
    Supervised Learning <supervisedlearning>
 
