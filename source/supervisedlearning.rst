@@ -1,3 +1,5 @@
+.. _sl:
+
 ###################
 Supervised Learning
 ###################
@@ -59,4 +61,6 @@ Ziel ist der Aufbau eines Entscheidungsbaums, in der alle Daten nach einer Teste
 * eine geringere Generalisierungsmöglichkeiten des Modells
 
 Um die Nachteile auszugleichen, verwendet man in der Praxis eher mehrere Decision Trees (→ siehe Random Forest) an.
+
+Zurück zu :ref:`sl`
 

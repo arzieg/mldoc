@@ -1,3 +1,5 @@
+.. _notation:
+
 ###########
 Notationen
 ###########
@@ -27,6 +29,7 @@ Dimensionen
 | L                                   | Anzahl Layer im Netzwerk                           |
 +-------------------------------------+----------------------------------------------------+
 
+Zurück zu :ref:`notation`
 
 Objects
 =======
@@ -41,6 +44,8 @@ Objects
 | :math:`\hat y \in \mathbb{R} ^{n_y}`  :  ist der berechnete Ergebnisvektor. Es kann auch :math:`a^{[L]}` geschrieben
   werden, wobei L die Anzahl der Layers in einem Netzwerk darstellt.
 
+Zurück zu :ref:`notation`
+
 Beispiele für typische Forward Propagation Gleichungen
 =======================================================
 
@@ -51,12 +56,14 @@ Beispiele für typische Forward Propagation Gleichungen
   g^{[l]}(z ^{[l]}_j)`
 | Kostenfunktion: :math:`J(x,W,b,y) \; oder \; J(\hat y,y)`
 
+Zurück zu :ref:`notation`
+
 Beispiele für Kostenfunktionen
 ===============================
 
 | :math:`J_{CE}(\hat y,y) = - \sum ^{m}_{i=0} \; y ^{(i)} \; log \; \hat y^{(i)}`
 | :math:`J_1(\hat y,y) = \sum ^{m}_{i=0} \; | y ^{(i)} \; - \; \hat y^{(i)}|`
 
-
+Zurück zu :ref:`notation`
 
 

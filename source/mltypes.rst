@@ -24,7 +24,7 @@ Es gibt verschiedene Typen von ML – Systemen. Géron gliedert diese in
     * model-based learning.
 
 Supervised Learning
-===================
+*******************
 Beim supervised learning beinhalten die Trainingsdaten auch die Lösung. Typische supervised learning Aufgaben sind:
 
 * Klassifikation von Daten (ein Datum gehört zur Klasse A, B, C, …)
@@ -42,7 +42,7 @@ Wichtige „learning“ Algorithmen sind:
 Zurück zu :ref:`mltypes`
 
 Unsupervised Learning
-=====================
+*********************
 Beim unsupervised learning sind die Trainingsdaten ohne Label (Wert). Das ML System „lernt“ ohne menschliche Anleitung.
 Beispiel ist die Ermittlung von Clustern innerhalb einer Datenmenge anhand von n-Featurs. Die Featureabhängigkeiten
 (bzw. Clusterzugehörigkeiten) werden vom angewandten Algorithmus ermittelt.
@@ -72,7 +72,7 @@ Typische ML Algorithmen:
 Zurück zu :ref:`mltypes`
 
 Semisupervised learning
-=======================
+***********************
 Eine Mischform von supervised und unsupervised learning. Beispiel sind Algorithmen, die auf Fotos eine Person
 identifizieren und Clustern können (unsupervised), werden diesen Personen dann Namen gegebene (Label), kann nach diesen
 gesucht und für supervised learning verwendet werden.
@@ -80,7 +80,7 @@ gesucht und für supervised learning verwendet werden.
 Zurück zu :ref:`mltypes`
 
 Reinforcement Learning
-=======================
+**********************
 Hierbei handelt es sich um ein System, welches auf Basis eines „gelernten“ Ergebnisses eine bessere zukünftige Strategie
 erarbeitet.
 
@@ -92,7 +92,7 @@ given situation“ [Géron, S.32]*
 Zurück zu :ref:`mltypes`
 
 Batch / Offline Learning
-========================
+************************
 Beim Batch Learning kann das ML System nicht auf aktuelle (online) Daten zugreifen und die Aussage/Vorhersage verbessern.
 Die vom ML System ermittelten Funktionen werden einmal auf Basis der vorhandenen Daten berechnet, in der Produktion
 werden diese Funktionen angewandt. Die Prozedur ist CPU / Disk intensiv. Aktualisierungen können zwar automatisiert
@@ -102,7 +102,7 @@ Systeme mit limitierten Ressourcen)
 Zurück zu :ref:`mltypes`
 
 Online / Incremental Learning
-=============================
+******************************
 Online Learning ML Systeme sind in der Lage, zusätzliche Daten in den Algorithmus aufzunehmen (also inkrementelles
 lernen) und in die Vorhersage einzubinden. Es kann aber auch verwendet werden bei sehr großen Systemen, bei dem die
 Daten nicht mehr in den Hauptspeicher passen (=out of core learning). Hierbei werden die Daten sukzessive in den RAM
@@ -115,7 +115,7 @@ Bei einer hohen Lernrate werden „alte“ Daten schneller vergessen. Dies kann 
 Zurück zu :ref:`mltypes`
 
 Instance Based vs. Model-Based Learning
-========================================
+***************************************
 Frage der Generalisierung des Modells.
 
 Beim Instance based Learning wird anhand von positiv (negativ) Beispielen neue Werte gelernt, die ähnlich sind, wie die
@@ -127,7 +127,7 @@ berechneten Funktionen.
 Zurück zu :ref:`mltypes`
 
 Scikit-Learn cheat sheet
-========================
+************************
 Welchen Algorithmus wende ich wann an: `Scikit-Learn cheat sheet`_
 
 .. _Scikit-Learn cheat sheet: https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
