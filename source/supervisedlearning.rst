@@ -10,12 +10,37 @@ Wichtige „learning“ Algorithmen sind:
 
 * k-Nearest Neighbors
 * Linear Regression
+* `Binary Classification`_
 * Logistic Regression
 * Support Vector Maschines (SVMs)
 * Decision Trees and Random Forests
 * Neuronal networks
 * Linear Regression (LR)
 * Der Klassiker: supervised_learning_linear_regression
+
+
+Binary Classification
+**********************
+
+Binary Classification ist die Aufgabe die vorhandenen Elemente in zwei Gruppen von Klassen einzuteilen. Beispiele:
+
+* Medizin: Krebs ja / nein
+* Qualitätssicherung: i.O / nich i.O.
+* Bildsuche: Katzenbild ja/nein
+
+**Beispiel bei einer Bildklassifizierung:**
+
+Ziel ist die Entwicklung eines Klassifizierungsmodelles zur Bilderkennung, bspw. Katze ja/nein.
+Als Eingangsparameter wird das Bild verwendet. Das Ergebnis ist ein Labelvektor y (1=Katze, 0=keine Katze).
+Das Bild wird zu einem Feature Vector X umgewandelt, Beispiel: Bild hat die Farben (RGB): rot x grün x blau.
+Pixelgröße 64 x 64. Um daraus einen Feature Vektor X abzuleiten, wird die Pixelintensität (Wert zw. 0-255) als Vektor
+dargestellt mit der Dimension 1 Spalte x (64 x 64 x 3 (RGB)) = 12288 Zeilen
+
+:math:`x = \begin{pmatrix} \color{Red}{255 \\ 12 \\ 128 \\ \vdots \\ }
+\color{Green}{86 \\ 172 \\ 255 \\ \vdots \\ }
+\color{Blue}{88 \\ 156 \\ 192 \\ \vdots}  \end{pmatrix}`
+
+Zurück zu :ref:`sl`
 
 Decision Trees
 **************
