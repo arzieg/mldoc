@@ -38,4 +38,25 @@ Objects
 | :math:`W^{[l]}\in \mathbb{R} ^{Anzahl \; Einheiten \; im \; Folgelayer \; \mathsf x \; Anzahl \; Einheiten \; im \; Vorlayer}`
   : Matrix der Gewichtungen, [l] ist der Layer
 | :math:`b^{[l]}\in \mathbb{R} ^{Anzahl \; Einheiten \; im \; Folgelayer}`  :  Bias-Vektor im [l]-ten Layer
+| :math:`\hat y \in \mathbb{R} ^{n_y}`  :  ist der berechnete Ergebnisvektor. Es kann auch :math:`a^{[L]}` geschrieben
+  werden, wobei L die Anzahl der Layers in einem Netzwerk darstellt.
+
+Beispiele für typische Forward Propagation Gleichungen
+=======================================================
+
+| :math:`a = g^{[l]}(W_x x^{(i)} + b_1) = g^{[l]}(z_1) \; wobei \; g^{[l]} \; die \; l^{[th]} \; Aktivierungsfunktion \;
+   beschreibt.`
+| :math:`\hat y^{(i)} = softmax (W_h h + b_2)`
+| Allgemeine Aktivierungsfunktion: :math:`a ^{[l]}_{j}=g ^{[l]}(\sum _k w ^{[l]}_{jk} a^{[l-1]}_k + b^{[l]}_j) =
+  g^{[l]}(z ^{[l]}_j)`
+| Kostenfunktion: :math:`J(x,W,b,y) \; oder \; J(\hat y,y)`
+
+Beispiele für Kostenfunktionen
+===============================
+
+| :math:`J_{CE}(\hat y,y) = - \sum ^{m}_{i=0} \; y ^{(i)} \; log \; \hat y^{(i)}`
+| :math:`J_1(\hat y,y) = \sum ^{m}_{i=0} \; | y ^{(i)} \; - \; \hat y^{(i)}|`
+
+
+
 
