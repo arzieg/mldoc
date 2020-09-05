@@ -58,7 +58,7 @@ Feature Inputvektor    x
 Training Label         y :math:`\in \; 0,1`
 Gewichtung             w
 Bias (Threshold)       b
-Output                 :math:`\hat y = \sigma(w^Tx+b)`
+"Gelernter" Output     :math:`\hat y = \sigma(w^Tx+b)`
 Sigmoid Funktion       :math:`\sigma(w^Tx+b)=\sigma(z)=\frac{1}{1+e^{-z}}`
 ===================    =====================================================
 
@@ -78,6 +78,26 @@ Eigenschaften:
 * wenn z sehr gross ist, dann ist :math:`\sigma(z) = 1`
 * wenn z sehr klein ist oder kleiner Null, dann ist :math:`\sigma(z)=0`
 * wenn z = 0 ist, dann ist :math:`\sigma(z) = 0.5`
+
+**Loss Funktion**
+
+Die Loss Funktion berechnet den "Abstand" zwischen den gelernten Outputwert :math:`\hat y^{(i)}` und dem Traininglabel
+:math:`y^{(i)}`. Diesen gilt es anhand der Loss Funktion zu minimieren.
+
+:math:`L(\hat y^{(i)},y^{(i)}) = 1/2 (\hat y^{(i)} - y^{(i)})^2`
+
+:math:`L(\hat y^{(i)},y^{(i)}) = -(y^{(i)}log(\hat y^{(i)})+(1-y^{(i)})log(1-\hat y^{(i)})`
+
+* wenn :math:`y^{(i)} = 1 \;:\;L=-log(\hat y^{(i)})` wobei :math:`log(\hat y^{(i)}) \; und \; \hat y^{(i)}` nahe bei 1 liegen sollen.
+
+* wenn :math:`y^{(i)} = 0 \;:\;L=-log(1-\hat y^{(i)})` wobei :math:`log(1-\hat y^{(i)}) \; und \; \hat y^{(i)}` nahe bei 0 liegen sollen.
+
+Die Kostenfunktion ist der Durchschnitt der Loss Funktion des Traingssets. Ziel ist es diese Funktion J(w,b) zu
+minimieren:
+
+:math:`J(w,b)=\frac{1}{m} \sum^{m}_{i=1} L(\hat y^{(i)},y^{(i)})=
+-\frac{1}{m} \sum^{m}_{i=1}[(y^{(i)}log(\hat y^{(i)})+(1-y^{(i)})log(1-\hat y^{(i)})]`
+
 
 
 Zurück zu :ref:`sl`
