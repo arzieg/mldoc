@@ -11,7 +11,7 @@ Wichtige „learning“ Algorithmen sind:
 * k-Nearest Neighbors
 * Linear Regression
 * `Binary Classification`_
-* Logistic Regression
+* `Logistic Regression`_
 * Support Vector Maschines (SVMs)
 * Decision Trees and Random Forests
 * Neuronal networks
@@ -41,6 +41,47 @@ dargestellt mit der Dimension 1 Spalte x (64 x 64 x 3 (RGB)) = 12288 Zeilen
 \color{Blue}{88 \\ 156 \\ 192 \\ \vdots}  \end{pmatrix}`
 
 Zurück zu :ref:`sl`
+
+
+Logistic Regression
+********************
+
+Bei der LR ist das Ergebnis entweder 1 oder 0. Ziel des LR ist die Minimierung des Fehlers zw. den Vorhersagedaten
+und Trainingsdaten.
+
+Die Parameter in LR sind:
+
+===================    =====================================================
+Bedeutung              Parameter oder Funktion
+===================    =====================================================
+Feature Inputvektor    x
+Training Label         y :math:`\in \; 0,1`
+Gewichtung             w
+Bias (Threshold)       b
+Output                 :math:`\hat y = \sigma(w^Tx+b)`
+Sigmoid Funktion       :math:`\sigma(w^Tx+b)=\sigma(z)=\frac{1}{1+e^{-z}}`
+===================    =====================================================
+
+.. _001_sl_sigmoid_function:
+
+.. figure:: pic/001_sl_sigmoid_function
+    :scale: 100%
+    :alt: Sigmoid Function
+    :align: center
+
+    :numref:`Sigmoid Function (Abb. %s)  <001_sl_sigmoid_function>`
+
+:math:`(w^Tx+b)` ist die lineare Funktion von (ax+b). Da nur nach der Wahrscheinlichkeit zwischen [0,1] bewertet wird,
+wird die Sigmoid Funktion verwendet, die die Werte auf einen Wertebereich zw. [0,1] normiert. Sie hat folgende
+Eigenschaften:
+
+* wenn z sehr gross ist, dann ist :math:`\sigma(z) = 1`
+* wenn z sehr klein ist oder kleiner Null, dann ist :math:`\sigma(z)=0`
+* wenn z = 0 ist, dann ist :math:`\sigma(z) = 0.5`
+
+
+Zurück zu :ref:`sl`
+
 
 Decision Trees
 **************
