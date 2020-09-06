@@ -92,11 +92,137 @@ Die Loss Funktion berechnet den "Abstand" zwischen den gelernten Outputwert :mat
 
 * wenn :math:`y^{(i)} = 0 \;:\;L=-log(1-\hat y^{(i)})` wobei :math:`log(1-\hat y^{(i)}) \; und \; \hat y^{(i)}` nahe bei 0 liegen sollen.
 
-Die Kostenfunktion ist der Durchschnitt der Loss Funktion des Traingssets. Ziel ist es diese Funktion J(w,b) zu
+Die Kostenfunktion aller Trainingselemente ist der Durchschnitt der Loss Funktion eines jeden Trainingswertes. Ziel ist es diese Funktion J(w,b) zu
 minimieren:
 
 :math:`J(w,b)=\frac{1}{m} \sum^{m}_{i=1} L(\hat y^{(i)},y^{(i)})=
 -\frac{1}{m} \sum^{m}_{i=1}[(y^{(i)}log(\hat y^{(i)})+(1-y^{(i)})log(1-\hat y^{(i)})]`
+
+
+**Beispiel: Foreward and Backward - Propagation in a Network**
+
+Die Lösung eines LR Problems kann über das Gradient Descence Verfahren angegangen werden. Hierbei wird ein lokales Minimum
+gesucht durch Änderung der unabhängigen Variablen in einer Kostenfunktion.
+
+Bsp.:
+Gegeben sei die Kostenfunktion J(a,b,c)=3(a+bc). u=bc, v=a+u und J=3v
+
+Als Berechnungsgraph kann man das wie folgt aufschreiben:
+
++-----+----------+----------------+----------+
+|a = 5|          |  v=a+u=5+6=11  |          |
++-----+----------+----------------+----------+
+|b = 3| u=3*2=6  |                | J=3*v=33 |
++-----+----------+----------------+----------+
+|c = 2|          |                |          |
++-----+----------+----------------+----------+
+
+Man möchte nun die Änderung einer Variable in Abhängigkeit einer anderen Variable bestimmen, d.h. wir gehen den
+Berechnungsgraphen nun von rechts nach links. Im Beispiel, wie ändert sich J, wenn sich v marginal ändert?
+Mathematisch :math:`\frac{dJ}{dv}`. In diesem Beispiel ist v=11 und J=33. Wenn wir v um 0.001 ändern, ändert sich
+J um 3 * 0.001 auf 33.003, d.h. :math:`\frac{dJ}{dv}=3`.
+J ist von v abhängig, während v von a und u abhängig ist. Wie ändert sich nun J, wenn ich a ändere :math:`\frac{dJ}{da}`?
+a=5, wenn a=5.001, dann ist v=11.001 und J=33.003. Somit ist :math:`\frac{dJ}{da}=3`.
+Oder in anderen Worten: Wenn ich a ändere, ändere ich v, wenn ich v ändere, ändere ich J. Das ist die Chain Rule:
+:math:`\frac{dJ}{da}=\frac{dJ}{dv}\frac{dv}{da}`. Am Beispiel: a=5.001 => v=11.001 dv/da=1 und J=33.003 bzw. dJ/dv=3
+und somit dJ/da=1 x 3 = 3.
+
+Analog bei :math:`\frac{dJ}{du}`. u=6, wenn u=6.001, dann ist v=11.001 und J=33.003.
+:math:`\frac{dJ}{du}=\frac{dJ}{dv}\frac{dv}{du}=3 * 1 = 3`
+
+Für :math:`\frac{dJ}{db}` gilt: b=3, b=3.001, u=6.002, v=11.002, J=33.006 oder
+:math:`\frac{dJ}{db}=\frac{dJ}{dv}\frac{dv}{du}\frac{du}{db}=3*1*2=6`
+
+Für :math:`\frac{dJ}{dc}=\frac{dJ}{dv}\frac{dv}{du}\frac{du}{dc}=3*1*3=9`
+
+
+**Foreward and Backward - Propagation im LR Network**
+
+Im LR Netzwerk haben wir
+
+* die lineare Funktion: :math:`z=w^Tx+b`
+* den gelernten Output: :math:`\hat y=a=\sigma(z)`
+* die Kostenfunktion: :math:`L(a,y) = -(y log(a) + (1-y)(log(1-a))`
+
+Als Berechnungsgraph:
+
+:math:`Input: \; x_1,w_1,x_2,w_2,b \rightarrow z=w_1x_1+w_2x_2+b \rightarrow \hat y=a=\sigma(z) \rightarrow L(a,y)`
+
+Für die Backpropagation gilt dann:
+:math:`\frac{dL}{dz}=\frac{dL}{da}\frac{da}{dz}`
+
+Schritt 1: :math:`\frac{dL}{da}`
+
+:math:`L= -(y log(a) + (1-y)log(1-a))`
+
+:math:`\frac{dL}{da}=-y \times \frac{1}{a} - (1-y) \times \frac{1}{1-a}\times -1`
+
+Achtung: -1 am Ende, da für f' von ln(1-a) die Chain-Rule gilt!
+
+:math:`\frac{dL}{da}=\frac{-y}{a} + \frac{1-y}{1-a}`
+
+:math:`\frac{dL}{da}=\frac{-y\times(1-a)}{a\times(1-a)} + \frac{a\times(1-y)}{a\times(1-a)}`
+
+:math:`\frac{dL}{da}=\frac{-y+ay+a-ay}{a(1-a)}`
+
+:math:`\frac{dL}{da}=\frac{a-y}{a(1-a)}`
+
+Schritt 2: :math:`\frac{da}{dz}`
+
+:math:`\frac{da}{dz}=\frac{d}{dz}\sigma(z)=\sigma(z)\times(1-\sigma(z))`
+
+Wir haben :math:`\sigma(z)=a` definiert. So kann die Formel vereinfacht werden zu
+
+:math:`\frac{da}{dz}=a(1-a)`
+
+    *Exkurs: Ableitung:*
+
+    :math:`\frac{d\sigma(z)}{dz}=\frac{d}{dz}\frac{1}{1+e^{-z}}`
+
+    Hier ist wieder die Chain Rule anzuwenden. Wir definieren :math:`u=1+e^{-z}`. Die Sigmoid Funktion kann nun
+    als :math:`\sigma(u)=\frac{1}{u}` geschrieben werden.
+
+    :math:`\frac{d\sigma(z)}{dz}=\frac{d\sigma(u)}{du}\frac{u}{dz}`
+
+    *Schritt 1:*
+
+    :math:`\frac{d\sigma(u)}{du}=\frac{d}{du}\frac{1}{u}=-\frac{1}{u^2}=-\frac{1}{(1+e^{-z})^2}`
+
+    *Schritt 2:*
+
+    :math:`\frac{du}{dz}=\frac{d}{dz}(1+e^{-z})=-e^{-z}`
+
+    *Schritt 3 zusammenbringen:*
+
+    :math:`\frac{d\sigma(z)}{dz}=\frac{d\sigma(u)}{du}\frac{u}{dz}=-\frac{1}{(1+e^{-z})^2} \times (-e^{-z})`
+
+    *Schritt 4 vereinfachen:*
+
+    Es ist :math:`\sigma(z)=\sigma=\frac{1}{(1+e^{-z})}`, daher gilt:
+
+    :math:`\frac{1}{(1+e^{-z})^2}=\sigma^2`
+
+    Für :math:`e^{-z}` gilt:
+
+    :math:`\sigma=\frac{1}{(1+e^{-z})} \Rightarrow \sigma(1+e^{-z})=1 \Rightarrow 1+e^{-z} = \frac{1}{\sigma}
+    \Rightarrow e^{-z} = \frac{1}{\sigma}-1=\frac{1-\sigma}{\sigma}`
+
+    Damit kann der Term vereinfacht werden zu:
+
+    :math:`\frac{d\sigma(z)}{dz}=\frac{1}{(1+e^{-z})^2} \times e^{-z} = \sigma^2 \times \frac{1-\sigma}{\sigma}=\sigma \times
+    (1-\sigma)`
+
+
+
+
+Schritt 3: :math:`\frac{dL}{dz}`
+
+:math:`\frac{dL}{dz}=\frac{dL}{da}\times\frac{da}{dz}`
+
+:math:`\frac{dL}{dz} = \frac{a-y}{a(1-a)} \times a(1-a) = a-y`
+
+
+
 
 
 
