@@ -70,4 +70,3 @@ Beispiele für Kostenfunktionen
 
 Zurück zu :ref:`notation`
 
-

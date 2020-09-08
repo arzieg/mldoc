@@ -8,6 +8,7 @@
     <title>Supervised Learning &#8212; ML Mitschriften 0.1 Dokumentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -70,6 +71,7 @@ dargestellt mit der Dimension 1 Spalte x (64 x 64 x 3 (RGB)) = 12288 Zeilen</p>
 </div>
 <div class="section" id="logistic-regression">
 <h2>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link zu dieser Überschrift">¶</a></h2>
+<p><em>Quelle: Andrew Ng, Neural Networks and Deep Learning, Coursera, 2020</em></p>
 <p>Bei der LR ist das Ergebnis entweder 1 oder 0. Ziel des LR ist die Minimierung des Fehlers zw. den Vorhersagedaten
 und Trainingsdaten.</p>
 <p>Die Parameter in LR sind:</p>
@@ -135,38 +137,27 @@ gesucht durch Änderung der unabhängigen Variablen in einer Kostenfunktion.</p>
 <p>Bsp.:
 Gegeben sei die Kostenfunktion J(a,b,c)=3(a+bc). u=bc, v=a+u und J=3v</p>
 <p>Als Berechnungsgraph kann man das wie folgt aufschreiben:</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 24%" />
-<col style="width: 39%" />
-<col style="width: 24%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p>a = 5</p></td>
-<td></td>
-<td><p>v=a+u=5+6=11</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>b = 3</p></td>
-<td><p>u=3*2=6</p></td>
-<td></td>
-<td><p>J=3*v=33</p></td>
-</tr>
-<tr class="row-odd"><td><p>c = 2</p></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Man möchte nun die Änderung einer Variable in Abhängigkeit einer anderen Variable bestimmen, d.h. wir gehen den
-Berechnungsgraphen nun von rechts nach links. Im Beispiel, wie ändert sich J, wenn sich v marginal ändert?
-Mathematisch <span class="math notranslate nohighlight">\(\frac{dJ}{dv}\)</span>. In diesem Beispiel ist v=11 und J=33. Wenn wir v um 0.001 ändern, ändert sich
+<div class="graphviz"><img src="_images/graphviz-c5ad7b4e63e255fd13cfc154a538bc1f82626af2.png" alt="digraph {
+    rankdir=LR;
+    &quot;a=5&quot; [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+    &quot;b=3&quot; [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+    &quot;c=2&quot; [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+    &quot;u=3*2=6&quot; [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+    &quot;v=a+u&quot; [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+    &quot;J=3v&quot; [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+    &quot;a=5&quot; -&gt; &quot;v=a+u&quot;;
+    &quot;b=3&quot;,&quot;c=2&quot; -&gt; &quot;u=3*2=6&quot;;
+    &quot;u=3*2=6&quot; -&gt; &quot;v=a+u&quot;;
+    &quot;v=a+u&quot; -&gt; &quot;J=3v&quot;;
+    { rank=same; &quot;a=5&quot;, &quot;b=3&quot;, &quot;c=2&quot; }
+}" class="graphviz" /></div>
+<p>Es wird nun die Änderung einer Variable in Abhängigkeit einer anderen Variable bestimmt, d.h. der
+Berechnungsgraph wird von rechts nach links berechnet. Im Beispiel: Änderungsrate von J, wenn v sich marginal ändert?
+Mathematisch <span class="math notranslate nohighlight">\(\frac{dJ}{dv}\)</span>. In diesem Beispiel ist v=11 und J=33. Wenn sich v um 0.001 ändert, ändert sich
 J um 3 * 0.001 auf 33.003, d.h. <span class="math notranslate nohighlight">\(\frac{dJ}{dv}=3\)</span>.
-J ist von v abhängig, während v von a und u abhängig ist. Wie ändert sich nun J, wenn ich a ändere <span class="math notranslate nohighlight">\(\frac{dJ}{da}\)</span>?
+J ist von v abhängig, während v von a und u abhängig ist. Wie ändert sich J, wenn a sich ändert <span class="math notranslate nohighlight">\(\frac{dJ}{da}\)</span>?
 a=5, wenn a=5.001, dann ist v=11.001 und J=33.003. Somit ist <span class="math notranslate nohighlight">\(\frac{dJ}{da}=3\)</span>.
-Oder in anderen Worten: Wenn ich a ändere, ändere ich v, wenn ich v ändere, ändere ich J. Das ist die Chain Rule:
+Oder in anderen Worten: Wenn sich a ändert, ändert sich v, ändert sich J. Das ist die Chain Rule:
 <span class="math notranslate nohighlight">\(\frac{dJ}{da}=\frac{dJ}{dv}\frac{dv}{da}\)</span>. Am Beispiel: a=5.001 =&gt; v=11.001 dv/da=1 und J=33.003 bzw. dJ/dv=3
 und somit dJ/da=1 x 3 = 3.</p>
 <p>Analog bei <span class="math notranslate nohighlight">\(\frac{dJ}{du}\)</span>. u=6, wenn u=6.001, dann ist v=11.001 und J=33.003.
@@ -334,7 +325,7 @@ Ziel ist der Aufbau eines Entscheidungsbaums, in der alle Daten nach einer Teste
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Arne Ziegler.
+      &copy;2020, arzieg.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>

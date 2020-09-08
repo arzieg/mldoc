@@ -45,6 +45,7 @@ Zurück zu :ref:`sl`
 
 Logistic Regression
 ********************
+*Quelle: Andrew Ng, Neural Networks and Deep Learning, Coursera, 2020*
 
 Bei der LR ist das Ergebnis entweder 1 oder 0. Ziel des LR ist die Minimierung des Fehlers zw. den Vorhersagedaten
 und Trainingsdaten.
@@ -109,21 +110,30 @@ Gegeben sei die Kostenfunktion J(a,b,c)=3(a+bc). u=bc, v=a+u und J=3v
 
 Als Berechnungsgraph kann man das wie folgt aufschreiben:
 
-+-----+----------+----------------+----------+
-|a = 5|          |  v=a+u=5+6=11  |          |
-+-----+----------+----------------+----------+
-|b = 3| u=3*2=6  |                | J=3*v=33 |
-+-----+----------+----------------+----------+
-|c = 2|          |                |          |
-+-----+----------+----------------+----------+
+.. graphviz::
 
-Man möchte nun die Änderung einer Variable in Abhängigkeit einer anderen Variable bestimmen, d.h. wir gehen den
-Berechnungsgraphen nun von rechts nach links. Im Beispiel, wie ändert sich J, wenn sich v marginal ändert?
-Mathematisch :math:`\frac{dJ}{dv}`. In diesem Beispiel ist v=11 und J=33. Wenn wir v um 0.001 ändern, ändert sich
+    digraph {
+        rankdir=LR;
+        "a=5" [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+        "b=3" [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+        "c=2" [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+        "u=3*2=6" [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+        "v=a+u" [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+        "J=3v" [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;
+        "a=5" -> "v=a+u";
+        "b=3","c=2" -> "u=3*2=6";
+        "u=3*2=6" -> "v=a+u";
+        "v=a+u" -> "J=3v";
+        { rank=same; "a=5", "b=3", "c=2" }
+    }
+
+Es wird nun die Änderung einer Variable in Abhängigkeit einer anderen Variable bestimmt, d.h. der
+Berechnungsgraph wird von rechts nach links berechnet. Im Beispiel: Änderungsrate von J, wenn v sich marginal ändert?
+Mathematisch :math:`\frac{dJ}{dv}`. In diesem Beispiel ist v=11 und J=33. Wenn sich v um 0.001 ändert, ändert sich
 J um 3 * 0.001 auf 33.003, d.h. :math:`\frac{dJ}{dv}=3`.
-J ist von v abhängig, während v von a und u abhängig ist. Wie ändert sich nun J, wenn ich a ändere :math:`\frac{dJ}{da}`?
+J ist von v abhängig, während v von a und u abhängig ist. Wie ändert sich J, wenn a sich ändert :math:`\frac{dJ}{da}`?
 a=5, wenn a=5.001, dann ist v=11.001 und J=33.003. Somit ist :math:`\frac{dJ}{da}=3`.
-Oder in anderen Worten: Wenn ich a ändere, ändere ich v, wenn ich v ändere, ändere ich J. Das ist die Chain Rule:
+Oder in anderen Worten: Wenn sich a ändert, ändert sich v, ändert sich J. Das ist die Chain Rule:
 :math:`\frac{dJ}{da}=\frac{dJ}{dv}\frac{dv}{da}`. Am Beispiel: a=5.001 => v=11.001 dv/da=1 und J=33.003 bzw. dJ/dv=3
 und somit dJ/da=1 x 3 = 3.
 
@@ -220,10 +230,6 @@ Schritt 3: :math:`\frac{dL}{dz}`
 :math:`\frac{dL}{dz}=\frac{dL}{da}\times\frac{da}{dz}`
 
 :math:`\frac{dL}{dz} = \frac{a-y}{a(1-a)} \times a(1-a) = a-y`
-
-
-
-
 
 
 Zurück zu :ref:`sl`
