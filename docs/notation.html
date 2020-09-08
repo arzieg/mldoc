@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notationen &#8212; ML Mitschriften 0.1 Dokumentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Maschinelearning Typen" href="mltypes.html" />
+    <link rel="prev" title="Welcome to ML Mitschriften’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="notationen">
+<span id="notation"></span><h1>Notationen<a class="headerlink" href="#notationen" title="Link zu dieser Überschrift">¶</a></h1>
+<div class="section" id="neuronale-netzwerke">
+<h2>Neuronale Netzwerke<a class="headerlink" href="#neuronale-netzwerke" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Ein hochgestelltes (i) beschreibt den i<sup>th</sup> Trainingssatz.
+Ein hochgestelltes [l] beschreibt den l<sup>th</sup> layer.</p>
+<div class="section" id="dimensionen">
+<h3>Dimensionen<a class="headerlink" href="#dimensionen" title="Link zu dieser Überschrift">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 58%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>m</p></td>
+<td><p>Anzahl Beispiele im Datensatz</p></td>
+</tr>
+<tr class="row-even"><td><p>n<sub>x</sub></p></td>
+<td><p>Input-Werte</p></td>
+</tr>
+<tr class="row-odd"><td><p>n<sub>y</sub></p></td>
+<td><p>Ergebnisse</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(n ^{\text{[l]}}_{\text{h}}\)</span></p></td>
+<td><p>Anzahl der Hidden Einheiten im l-ten Layer</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>In einer for - Schleife ist auch folgende Schreibweise möglich
+<span class="math notranslate nohighlight">\(n_x = n ^{\text{[0]}}_{\text{h}}\)</span> und
+<span class="math notranslate nohighlight">\(n_y = n ^{\text{[number of layers + 1]}}_{\text{h}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>L</p></td>
+<td><p>Anzahl Layer im Netzwerk</p></td>
+</tr>
+<tr class="row-odd"><td><p>log</p></td>
+<td><p>im Machine Learning Kontext ist damit der
+natürliche Logarithmus ln gemeint.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Zurück zu <a class="reference internal" href="#notation"><span class="std std-ref">Notationen</span></a></p>
+</div>
+<div class="section" id="objects">
+<h3>Objects<a class="headerlink" href="#objects" title="Link zu dieser Überschrift">¶</a></h3>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(X \in \mathbb{R} ^{n_x \; \mathsf x \;m}\)</span>  :  Inputmatrix X</div>
+<div class="line"><span class="math notranslate nohighlight">\(x^{(i)} \in \mathbb{R} ^{n_x}\)</span>             :  <span class="math notranslate nohighlight">\(i^{th}\)</span> Datensatz als Spaltenvektor</div>
+<div class="line"><span class="math notranslate nohighlight">\(Y \in \mathbb{R} ^{n_y \; \mathsf x \;m}\)</span>  :  Labelmatrix Y (Ergebnismatrix)</div>
+<div class="line"><span class="math notranslate nohighlight">\(y^{(i)} \in \mathbb{R} ^{n_y}\)</span>             :  <span class="math notranslate nohighlight">\(i^{th}\)</span> Labelsatz als Spaltenvektor |</div>
+<div class="line"><span class="math notranslate nohighlight">\(W^{[l]}\in \mathbb{R} ^{Anzahl \; Einheiten \; im \; Folgelayer \; \mathsf x \; Anzahl \; Einheiten \; im \; Vorlayer}\)</span>
+: Matrix der Gewichtungen, [l] ist der Layer</div>
+<div class="line"><span class="math notranslate nohighlight">\(b^{[l]}\in \mathbb{R} ^{Anzahl \; Einheiten \; im \; Folgelayer}\)</span>  :  Bias-Vektor im [l]-ten Layer</div>
+<div class="line"><span class="math notranslate nohighlight">\(\hat y \in \mathbb{R} ^{n_y}\)</span>  :  ist der berechnete Ergebnisvektor. Es kann auch <span class="math notranslate nohighlight">\(a^{[L]}\)</span> geschrieben
+werden, wobei L die Anzahl der Layers in einem Netzwerk darstellt.</div>
+</div>
+<p>Zurück zu <a class="reference internal" href="#notation"><span class="std std-ref">Notationen</span></a></p>
+</div>
+<div class="section" id="beispiele-fur-typische-forward-propagation-gleichungen">
+<h3>Beispiele für typische Forward Propagation Gleichungen<a class="headerlink" href="#beispiele-fur-typische-forward-propagation-gleichungen" title="Link zu dieser Überschrift">¶</a></h3>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(a = g^{[l]}(W_x x^{(i)} + b_1) = g^{[l]}(z_1) \; wobei \; g^{[l]} \; die \; l^{[th]} \; Aktivierungsfunktion \;
+beschreibt.\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\hat y^{(i)} = softmax (W_h h + b_2)\)</span></div>
+<div class="line">Allgemeine Aktivierungsfunktion: <span class="math notranslate nohighlight">\(a ^{[l]}_{j}=g ^{[l]}(\sum _k w ^{[l]}_{jk} a^{[l-1]}_k + b^{[l]}_j) =
+g^{[l]}(z ^{[l]}_j)\)</span></div>
+<div class="line">Kostenfunktion: <span class="math notranslate nohighlight">\(J(x,W,b,y) \; oder \; J(\hat y,y)\)</span></div>
+</div>
+<p>Zurück zu <a class="reference internal" href="#notation"><span class="std std-ref">Notationen</span></a></p>
+</div>
+<div class="section" id="beispiele-fur-kostenfunktionen">
+<h3>Beispiele für Kostenfunktionen<a class="headerlink" href="#beispiele-fur-kostenfunktionen" title="Link zu dieser Überschrift">¶</a></h3>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(J_{CE}(\hat y,y) = - \sum ^{m}_{i=0} \; y ^{(i)} \; log \; \hat y^{(i)}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(J_1(\hat y,y) = \sum ^{m}_{i=0} \; | y ^{(i)} \; - \; \hat y^{(i)}|\)</span></div>
+</div>
+<p>Zurück zu <a class="reference internal" href="#notation"><span class="std std-ref">Notationen</span></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ML Mitschriften</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Notationen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#neuronale-netzwerke">Neuronale Netzwerke</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mltypes.html">Maschinelearning Typen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervisedlearning.html">Supervised Learning</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="vorheriges Kapitel">Welcome to ML Mitschriften’s documentation!</a></li>
+      <li>Next: <a href="mltypes.html" title="nächstes Kapitel">Maschinelearning Typen</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Schnellsuche</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Los" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Arne Ziegler.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/notation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

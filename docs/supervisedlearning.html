@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supervised Learning &#8212; ML Mitschriften 0.1 Dokumentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="prev" title="Maschinelearning Typen" href="mltypes.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="supervised-learning">
+<span id="sl"></span><h1>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Link zu dieser Überschrift">¶</a></h1>
+<p>Beim SL sind neben den Beobachtungen (Features) auch die daraus resultierenden Ergebnisse bekannt.</p>
+<p>Wichtige „learning“ Algorithmen sind:</p>
+<ul class="simple">
+<li><p>k-Nearest Neighbors</p></li>
+<li><p>Linear Regression</p></li>
+<li><p><a class="reference internal" href="#binary-classification">Binary Classification</a></p></li>
+<li><p><a class="reference internal" href="#logistic-regression">Logistic Regression</a></p></li>
+<li><p>Support Vector Maschines (SVMs)</p></li>
+<li><p>Decision Trees and Random Forests</p></li>
+<li><p>Neuronal networks</p></li>
+<li><p>Linear Regression (LR)</p></li>
+<li><p>Der Klassiker: supervised_learning_linear_regression</p></li>
+</ul>
+<div class="section" id="binary-classification">
+<h2>Binary Classification<a class="headerlink" href="#binary-classification" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Binary Classification ist die Aufgabe die vorhandenen Elemente in zwei Gruppen von Klassen einzuteilen. Beispiele:</p>
+<ul class="simple">
+<li><p>Medizin: Krebs ja / nein</p></li>
+<li><p>Qualitätssicherung: i.O / nich i.O.</p></li>
+<li><p>Bildsuche: Katzenbild ja/nein</p></li>
+</ul>
+<p><strong>Beispiel bei einer Bildklassifizierung:</strong></p>
+<p>Ziel ist die Entwicklung eines Klassifizierungsmodelles zur Bilderkennung, bspw. Katze ja/nein.
+Als Eingangsparameter wird das Bild verwendet. Das Ergebnis ist ein Labelvektor y (1=Katze, 0=keine Katze).
+Das Bild wird zu einem Feature Vector X umgewandelt, Beispiel: Bild hat die Farben (RGB): rot x grün x blau.
+Pixelgröße 64 x 64. Um daraus einen Feature Vektor X abzuleiten, wird die Pixelintensität (Wert zw. 0-255) als Vektor
+dargestellt mit der Dimension 1 Spalte x (64 x 64 x 3 (RGB)) = 12288 Zeilen</p>
+<p><span class="math notranslate nohighlight">\(x = \begin{pmatrix} \color{Red}{255 \\ 12 \\ 128 \\ \vdots \\ }
+\color{Green}{86 \\ 172 \\ 255 \\ \vdots \\ }
+\color{Blue}{88 \\ 156 \\ 192 \\ \vdots}  \end{pmatrix}\)</span></p>
+<p>Zurück zu <a class="reference internal" href="#sl"><span class="std std-ref">Supervised Learning</span></a></p>
+</div>
+<div class="section" id="logistic-regression">
+<h2>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Bei der LR ist das Ergebnis entweder 1 oder 0. Ziel des LR ist die Minimierung des Fehlers zw. den Vorhersagedaten
+und Trainingsdaten.</p>
+<p>Die Parameter in LR sind:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bedeutung</p></th>
+<th class="head"><p>Parameter oder Funktion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Feature Inputvektor</p></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-odd"><td><p>Training Label</p></td>
+<td><p>y <span class="math notranslate nohighlight">\(\in \; 0,1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Gewichtung</p></td>
+<td><p>w</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bias (Threshold)</p></td>
+<td><p>b</p></td>
+</tr>
+<tr class="row-even"><td><p>„Gelernter“ Output</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat y = \sigma(w^Tx+b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Sigmoid Funktion</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma(w^Tx+b)=\sigma(z)=\frac{1}{1+e^{-z}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-center" id="id1">
+<span id="sl-sigmoid-function"></span><a class="reference internal image-reference" href="_images/001_sl_sigmoid_function"><img alt="Sigmoid Function" src="_images/001_sl_sigmoid_function" style="width: 634.0px; height: 397.0px;" /></a>
+<p class="caption"><span class="caption-number">Abb. 1: </span><span class="caption-text"><a class="reference internal" href="#sl-sigmoid-function"><span class="std std-numref">Sigmoid Function (Abb. 1)</span></a></span><a class="headerlink" href="#id1" title="Link zu diesem Bild">¶</a></p>
+</div>
+<p><span class="math notranslate nohighlight">\((w^Tx+b)\)</span> ist die lineare Funktion von (ax+b). Da nur nach der Wahrscheinlichkeit zwischen [0,1] bewertet wird,
+wird die Sigmoid Funktion verwendet, die die Werte auf einen Wertebereich zw. [0,1] normiert. Sie hat folgende
+Eigenschaften:</p>
+<ul class="simple">
+<li><p>wenn z sehr gross ist, dann ist <span class="math notranslate nohighlight">\(\sigma(z) = 1\)</span></p></li>
+<li><p>wenn z sehr klein ist oder kleiner Null, dann ist <span class="math notranslate nohighlight">\(\sigma(z)=0\)</span></p></li>
+<li><p>wenn z = 0 ist, dann ist <span class="math notranslate nohighlight">\(\sigma(z) = 0.5\)</span></p></li>
+</ul>
+<p><strong>Loss Funktion</strong></p>
+<p>Die Loss Funktion berechnet den „Abstand“ zwischen den gelernten Outputwert <span class="math notranslate nohighlight">\(\hat y^{(i)}\)</span> und dem Traininglabel
+<span class="math notranslate nohighlight">\(y^{(i)}\)</span>. Diesen gilt es anhand der Loss Funktion zu minimieren.</p>
+<p><span class="math notranslate nohighlight">\(L(\hat y^{(i)},y^{(i)}) = 1/2 (\hat y^{(i)} - y^{(i)})^2\)</span></p>
+<p><span class="math notranslate nohighlight">\(L(\hat y^{(i)},y^{(i)}) = -(y^{(i)}log(\hat y^{(i)})+(1-y^{(i)})log(1-\hat y^{(i)})\)</span></p>
+<ul class="simple">
+<li><p>wenn <span class="math notranslate nohighlight">\(y^{(i)} = 1 \;:\;L=-log(\hat y^{(i)})\)</span> wobei <span class="math notranslate nohighlight">\(log(\hat y^{(i)}) \; und \; \hat y^{(i)}\)</span> nahe bei 1 liegen sollen.</p></li>
+<li><p>wenn <span class="math notranslate nohighlight">\(y^{(i)} = 0 \;:\;L=-log(1-\hat y^{(i)})\)</span> wobei <span class="math notranslate nohighlight">\(log(1-\hat y^{(i)}) \; und \; \hat y^{(i)}\)</span> nahe bei 0 liegen sollen.</p></li>
+</ul>
+<p>Die Kostenfunktion aller Trainingselemente ist der Durchschnitt der Loss Funktion eines jeden Trainingswertes. Ziel ist es diese Funktion J(w,b) zu
+minimieren:</p>
+<p><span class="math notranslate nohighlight">\(J(w,b)=\frac{1}{m} \sum^{m}_{i=1} L(\hat y^{(i)},y^{(i)})=
+-\frac{1}{m} \sum^{m}_{i=1}[(y^{(i)}log(\hat y^{(i)})+(1-y^{(i)})log(1-\hat y^{(i)})]\)</span></p>
+<p><strong>Beispiel: Foreward and Backward - Propagation in a Network</strong></p>
+<p>Die Lösung eines LR Problems kann über das Gradient Descence Verfahren angegangen werden. Hierbei wird ein lokales Minimum
+gesucht durch Änderung der unabhängigen Variablen in einer Kostenfunktion.</p>
+<p>Bsp.:
+Gegeben sei die Kostenfunktion J(a,b,c)=3(a+bc). u=bc, v=a+u und J=3v</p>
+<p>Als Berechnungsgraph kann man das wie folgt aufschreiben:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 24%" />
+<col style="width: 39%" />
+<col style="width: 24%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>a = 5</p></td>
+<td></td>
+<td><p>v=a+u=5+6=11</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>b = 3</p></td>
+<td><p>u=3*2=6</p></td>
+<td></td>
+<td><p>J=3*v=33</p></td>
+</tr>
+<tr class="row-odd"><td><p>c = 2</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Man möchte nun die Änderung einer Variable in Abhängigkeit einer anderen Variable bestimmen, d.h. wir gehen den
+Berechnungsgraphen nun von rechts nach links. Im Beispiel, wie ändert sich J, wenn sich v marginal ändert?
+Mathematisch <span class="math notranslate nohighlight">\(\frac{dJ}{dv}\)</span>. In diesem Beispiel ist v=11 und J=33. Wenn wir v um 0.001 ändern, ändert sich
+J um 3 * 0.001 auf 33.003, d.h. <span class="math notranslate nohighlight">\(\frac{dJ}{dv}=3\)</span>.
+J ist von v abhängig, während v von a und u abhängig ist. Wie ändert sich nun J, wenn ich a ändere <span class="math notranslate nohighlight">\(\frac{dJ}{da}\)</span>?
+a=5, wenn a=5.001, dann ist v=11.001 und J=33.003. Somit ist <span class="math notranslate nohighlight">\(\frac{dJ}{da}=3\)</span>.
+Oder in anderen Worten: Wenn ich a ändere, ändere ich v, wenn ich v ändere, ändere ich J. Das ist die Chain Rule:
+<span class="math notranslate nohighlight">\(\frac{dJ}{da}=\frac{dJ}{dv}\frac{dv}{da}\)</span>. Am Beispiel: a=5.001 =&gt; v=11.001 dv/da=1 und J=33.003 bzw. dJ/dv=3
+und somit dJ/da=1 x 3 = 3.</p>
+<p>Analog bei <span class="math notranslate nohighlight">\(\frac{dJ}{du}\)</span>. u=6, wenn u=6.001, dann ist v=11.001 und J=33.003.
+<span class="math notranslate nohighlight">\(\frac{dJ}{du}=\frac{dJ}{dv}\frac{dv}{du}=3 * 1 = 3\)</span></p>
+<p>Für <span class="math notranslate nohighlight">\(\frac{dJ}{db}\)</span> gilt: b=3, b=3.001, u=6.002, v=11.002, J=33.006 oder
+<span class="math notranslate nohighlight">\(\frac{dJ}{db}=\frac{dJ}{dv}\frac{dv}{du}\frac{du}{db}=3*1*2=6\)</span></p>
+<p>Für <span class="math notranslate nohighlight">\(\frac{dJ}{dc}=\frac{dJ}{dv}\frac{dv}{du}\frac{du}{dc}=3*1*3=9\)</span></p>
+<p><strong>Foreward and Backward - Propagation im LR Network</strong></p>
+<p>Im LR Netzwerk haben wir</p>
+<ul class="simple">
+<li><p>die lineare Funktion: <span class="math notranslate nohighlight">\(z=w^Tx+b\)</span></p></li>
+<li><p>den gelernten Output: <span class="math notranslate nohighlight">\(\hat y=a=\sigma(z)\)</span></p></li>
+<li><p>die Kostenfunktion: <span class="math notranslate nohighlight">\(L(a,y) = -(y log(a) + (1-y)(log(1-a))\)</span></p></li>
+</ul>
+<p>Als Berechnungsgraph:</p>
+<p><span class="math notranslate nohighlight">\(Input: \; x_1,w_1,x_2,w_2,b \rightarrow z=w_1x_1+w_2x_2+b \rightarrow \hat y=a=\sigma(z) \rightarrow L(a,y)\)</span></p>
+<p>Für die Backpropagation gilt dann:
+<span class="math notranslate nohighlight">\(\frac{dL}{dz}=\frac{dL}{da}\frac{da}{dz}\)</span></p>
+<p>Schritt 1: <span class="math notranslate nohighlight">\(\frac{dL}{da}\)</span></p>
+<p><span class="math notranslate nohighlight">\(L= -(y log(a) + (1-y)log(1-a))\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{dL}{da}=-y \times \frac{1}{a} - (1-y) \times \frac{1}{1-a}\times -1\)</span></p>
+<p>Achtung: -1 am Ende, da für f‘ von ln(1-a) die Chain-Rule gilt!</p>
+<p><span class="math notranslate nohighlight">\(\frac{dL}{da}=\frac{-y}{a} + \frac{1-y}{1-a}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{dL}{da}=\frac{-y\times(1-a)}{a\times(1-a)} + \frac{a\times(1-y)}{a\times(1-a)}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{dL}{da}=\frac{-y+ay+a-ay}{a(1-a)}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{dL}{da}=\frac{a-y}{a(1-a)}\)</span></p>
+<p>Schritt 2: <span class="math notranslate nohighlight">\(\frac{da}{dz}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{da}{dz}=\frac{d}{dz}\sigma(z)=\sigma(z)\times(1-\sigma(z))\)</span></p>
+<p>Wir haben <span class="math notranslate nohighlight">\(\sigma(z)=a\)</span> definiert. So kann die Formel vereinfacht werden zu</p>
+<p><span class="math notranslate nohighlight">\(\frac{da}{dz}=a(1-a)\)</span></p>
+<blockquote>
+<div><p><em>Exkurs: Ableitung:</em></p>
+<p><span class="math notranslate nohighlight">\(\frac{d\sigma(z)}{dz}=\frac{d}{dz}\frac{1}{1+e^{-z}}\)</span></p>
+<p>Hier ist wieder die Chain Rule anzuwenden. Wir definieren <span class="math notranslate nohighlight">\(u=1+e^{-z}\)</span>. Die Sigmoid Funktion kann nun
+als <span class="math notranslate nohighlight">\(\sigma(u)=\frac{1}{u}\)</span> geschrieben werden.</p>
+<p><span class="math notranslate nohighlight">\(\frac{d\sigma(z)}{dz}=\frac{d\sigma(u)}{du}\frac{u}{dz}\)</span></p>
+<p><em>Schritt 1:</em></p>
+<p><span class="math notranslate nohighlight">\(\frac{d\sigma(u)}{du}=\frac{d}{du}\frac{1}{u}=-\frac{1}{u^2}=-\frac{1}{(1+e^{-z})^2}\)</span></p>
+<p><em>Schritt 2:</em></p>
+<p><span class="math notranslate nohighlight">\(\frac{du}{dz}=\frac{d}{dz}(1+e^{-z})=-e^{-z}\)</span></p>
+<p><em>Schritt 3 zusammenbringen:</em></p>
+<p><span class="math notranslate nohighlight">\(\frac{d\sigma(z)}{dz}=\frac{d\sigma(u)}{du}\frac{u}{dz}=-\frac{1}{(1+e^{-z})^2} \times (-e^{-z})\)</span></p>
+<p><em>Schritt 4 vereinfachen:</em></p>
+<p>Es ist <span class="math notranslate nohighlight">\(\sigma(z)=\sigma=\frac{1}{(1+e^{-z})}\)</span>, daher gilt:</p>
+<p><span class="math notranslate nohighlight">\(\frac{1}{(1+e^{-z})^2}=\sigma^2\)</span></p>
+<p>Für <span class="math notranslate nohighlight">\(e^{-z}\)</span> gilt:</p>
+<p><span class="math notranslate nohighlight">\(\sigma=\frac{1}{(1+e^{-z})} \Rightarrow \sigma(1+e^{-z})=1 \Rightarrow 1+e^{-z} = \frac{1}{\sigma}
+\Rightarrow e^{-z} = \frac{1}{\sigma}-1=\frac{1-\sigma}{\sigma}\)</span></p>
+<p>Damit kann der Term vereinfacht werden zu:</p>
+<p><span class="math notranslate nohighlight">\(\frac{d\sigma(z)}{dz}=\frac{1}{(1+e^{-z})^2} \times e^{-z} = \sigma^2 \times \frac{1-\sigma}{\sigma}=\sigma \times
+(1-\sigma)\)</span></p>
+</div></blockquote>
+<p>Schritt 3: <span class="math notranslate nohighlight">\(\frac{dL}{dz}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{dL}{dz}=\frac{dL}{da}\times\frac{da}{dz}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{dL}{dz} = \frac{a-y}{a(1-a)} \times a(1-a) = a-y\)</span></p>
+<p>Zurück zu <a class="reference internal" href="#sl"><span class="std std-ref">Supervised Learning</span></a></p>
+</div>
+<div class="section" id="decision-trees">
+<h2>Decision Trees<a class="headerlink" href="#decision-trees" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Bei einem Entscheidungsbaum werden die Daten in verschiedene Kategorien unterteilt. Dabei wird je Iteration ein
+neues Knotenpaar erzeugt, bis alle Traings-Daten einem Knoten zugeordnet sind. Aufgrund des Algorithmus neigt
+dieser zum „overfitting“, d.h. es wird ein Entscheidungsbaum in der Form aufgebaut, so dass alle Trainingsdaten
+im Extremfall einem Knoten zugeordnet sind. Die Testdaten müssen dann nicht zwingend genausogut in diese Kategorien
+fallen! In sklearn gibt es zwei Klassen:</p>
+<blockquote>
+<div><p><strong>DecisionTreeRegressor</strong> und
+<strong>DecisionTreeClassifier</strong>.</p>
+</div></blockquote>
+<p>DecisionTreeRegressor sind nicht in der Lage Vorhersagen außerhalb des Gültigkeitsbereichs der Trainingsdaten
+zu machen!</p>
+<p><strong>Wichtige Begriffe:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>root – Ursprungsknoten, dieser beinhaltet alle Testdaten</p></li>
+<li><p>leaf – Endknoten (Blätter). Enthält der Leaf-Knoten alle den identischen Wert, wird auch von einem pure – leaf Knoten gesprochen.</p></li>
+</ul>
+</div></blockquote>
+<p>In jedem Knoten  gibt es eine Testbedingung, die zum nächsten „Ast“ verzweigt.
+Vermeidung von „Overfitting“ durch zwei Strategien:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>pre-pruning – Angabe der maximalen Ebenen eines Entscheidungsbaumes. In sklearn implementiert über</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>max_depth: maximale Anzahl der Ebenen</p></li>
+<li><p>max_leaf_nodes:  maximale Anzahl der Leafs</p></li>
+<li><p>min_samples_leaf: minimale Anzahl von Daten in einem Knoten, die vorhanden sein müssen.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>post-pruning/pruning – Die letzte Ebene wird eleminiert, um ein „overfitting“ zu vermeiden. In sklearn nicht implementiert.</p></li>
+</ol>
+</div></blockquote>
+<p>feature importance: in sklearn wird beim Aufbau eines Entscheidungsbaums auch ein Array feature_importance mit Werten gefüllt. Diese geben an, welches Feature (Spalte) am Relevantesten für den Aufbau des Entscheidungsbaums ist. Die Summe alle feature_importances ist 1.</p>
+<p><strong>Ziel des ML Algorithmus:</strong>
+Ziel ist der Aufbau eines Entscheidungsbaums, in der alle Daten nach einer Testentscheidung einem Knoten zugeordnet werden können.</p>
+<p><strong>Vorteile von DT:</strong>
+* Ergebnisse sind leicht zu visualisieren und leicht verständlich für nicht Experten
+* Daten müssen nicht erst in eine Standardnorm umgeformt werden.</p>
+<p><strong>Nachteile von DT:</strong>
+* Tendenz zum „Overfitting“. Die Trainingsdaten werden – ohne (pre-)pruning – zu 100% einem Knoten zugeordnet. Der Akzeptanztest für die Testdaten fällt in der Regel schlechter aus, daher gilt
+* eine geringere Generalisierungsmöglichkeiten des Modells</p>
+<p>Um die Nachteile auszugleichen, verwendet man in der Praxis eher mehrere Decision Trees (→ siehe Random Forest) an.</p>
+<p>Zurück zu <a class="reference internal" href="#sl"><span class="std std-ref">Supervised Learning</span></a></p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ML Mitschriften</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mltypes.html">Maschinelearning Typen</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Supervised Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#binary-classification">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logistic-regression">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#decision-trees">Decision Trees</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="mltypes.html" title="vorheriges Kapitel">Maschinelearning Typen</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Schnellsuche</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Los" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Arne Ziegler.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/supervisedlearning.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

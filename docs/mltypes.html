@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maschinelearning Typen &#8212; ML Mitschriften 0.1 Dokumentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Supervised Learning" href="supervisedlearning.html" />
+    <link rel="prev" title="Notationen" href="notation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="maschinelearning-typen">
+<span id="mltypes"></span><h1>Maschinelearning Typen<a class="headerlink" href="#maschinelearning-typen" title="Link zu dieser Überschrift">¶</a></h1>
+<p>Es gibt verschiedene Typen von ML – Systemen. Géron gliedert diese in</p>
+<ul>
+<li><p>Systeme die autonom oder unter menschlicher Anleitung trainiert werden:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>supervised learning</p></li>
+<li><p>unsupervised learning</p></li>
+<li><p>semisupervised learning</p></li>
+<li><p>reinforcement learning</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Systeme die online oder nur offline trainiert werden</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>online vs.</p></li>
+<li><p>offline (batch) learning</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Systeme die neue Punkte mit vorhandenen vergleichen oder Muster erkennen:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>instance-based vs.</p></li>
+<li><p>model-based learning.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="supervised-learning">
+<h2>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Beim supervised learning beinhalten die Trainingsdaten auch die Lösung. Typische supervised learning Aufgaben sind:</p>
+<ul class="simple">
+<li><p>Klassifikation von Daten (ein Datum gehört zur Klasse A, B, C, …)</p></li>
+<li><p>Analyse von Daten in Abhängigkeit von mehreren unabhängigen Daten (Regressionsanalysen).</p></li>
+</ul>
+<p>Wichtige „learning“ Algorithmen sind:</p>
+<ul class="simple">
+<li><p>k-Nearest Neighbors</p></li>
+<li><p>Linear Regression</p></li>
+<li><p>Logistic Regression</p></li>
+<li><p>Support Vector Maschines (SVMs)</p></li>
+<li><p>Decision Trees and Random Forests</p></li>
+<li><p>Neuronal networks</p></li>
+</ul>
+<p>Zurück zu <a class="reference internal" href="#mltypes"><span class="std std-ref">Maschinelearning Typen</span></a></p>
+</div>
+<div class="section" id="unsupervised-learning">
+<h2>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Beim unsupervised learning sind die Trainingsdaten ohne Label (Wert). Das ML System „lernt“ ohne menschliche Anleitung.
+Beispiel ist die Ermittlung von Clustern innerhalb einer Datenmenge anhand von n-Featurs. Die Featureabhängigkeiten
+(bzw. Clusterzugehörigkeiten) werden vom angewandten Algorithmus ermittelt.</p>
+<p>Weitere Anwendungsgebiete sind:</p>
+<ul class="simple">
+<li><p>Datenvisualisierung</p></li>
+<li><p>Dimensionsreduktion (feature extraction – also welche Features beeinflussen das Ergebnis)</p></li>
+<li><p>Anomaly detection (Fraud detection)</p></li>
+<li><p>association rule learning (Identifizierung von Korrelationen – z.B. Chips + Ketchup korrelieren mit Steaks)</p></li>
+</ul>
+<p>Typische ML Algorithmen:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Clustering</dt><dd><ul>
+<li><p>k-means</p></li>
+<li><p>hierarchical cluster analysis (HCA)</p></li>
+<li><p>expectation maximization</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>visualization and dimensionality reduction</dt><dd><ul>
+<li><p>principal component analysis (PCA)</p></li>
+<li><p>Kernel PCA</p></li>
+<li><p>Locally-Linear Embedding (LLE)</p></li>
+<li><p>t-distributed Stochastic Neighbor Embedding (t-SNE)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Association rule learning</dt><dd><ul>
+<li><p>Apriori</p></li>
+<li><p>Eclat</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Zurück zu <a class="reference internal" href="#mltypes"><span class="std std-ref">Maschinelearning Typen</span></a></p>
+</div>
+<div class="section" id="semisupervised-learning">
+<h2>Semisupervised learning<a class="headerlink" href="#semisupervised-learning" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Eine Mischform von supervised und unsupervised learning. Beispiel sind Algorithmen, die auf Fotos eine Person
+identifizieren und Clustern können (unsupervised), werden diesen Personen dann Namen gegebene (Label), kann nach diesen
+gesucht und für supervised learning verwendet werden.</p>
+<p>Zurück zu <a class="reference internal" href="#mltypes"><span class="std std-ref">Maschinelearning Typen</span></a></p>
+</div>
+<div class="section" id="reinforcement-learning">
+<h2>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Hierbei handelt es sich um ein System, welches auf Basis eines „gelernten“ Ergebnisses eine bessere zukünftige Strategie
+erarbeitet.</p>
+<p><em>…“The learning system, called an agent in this context, can observe the environment, select and perform actions and get
+rewards in return (or penalties in the form of negative rewards). It must then learn by itself what is the best strategy,
+called a policy, to get the most reward over time. A policy defines what action the agent should choose when it is in a
+given situation“ [Géron, S.32]</em></p>
+<p>Zurück zu <a class="reference internal" href="#mltypes"><span class="std std-ref">Maschinelearning Typen</span></a></p>
+</div>
+<div class="section" id="batch-offline-learning">
+<h2>Batch / Offline Learning<a class="headerlink" href="#batch-offline-learning" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Beim Batch Learning kann das ML System nicht auf aktuelle (online) Daten zugreifen und die Aussage/Vorhersage verbessern.
+Die vom ML System ermittelten Funktionen werden einmal auf Basis der vorhandenen Daten berechnet, in der Produktion
+werden diese Funktionen angewandt. Die Prozedur ist CPU / Disk intensiv. Aktualisierungen können zwar automatisiert
+eingespielt werden, verlangen aber immer wieder die gleiche ressourcenintensive Berechnung (sind somit ungeeignet für
+Systeme mit limitierten Ressourcen)</p>
+<p>Zurück zu <a class="reference internal" href="#mltypes"><span class="std std-ref">Maschinelearning Typen</span></a></p>
+</div>
+<div class="section" id="online-incremental-learning">
+<h2>Online / Incremental Learning<a class="headerlink" href="#online-incremental-learning" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Online Learning ML Systeme sind in der Lage, zusätzliche Daten in den Algorithmus aufzunehmen (also inkrementelles
+lernen) und in die Vorhersage einzubinden. Es kann aber auch verwendet werden bei sehr großen Systemen, bei dem die
+Daten nicht mehr in den Hauptspeicher passen (=out of core learning). Hierbei werden die Daten sukzessive in den RAM
+geladen und verarbeitet. Das ganze passiert damit im Batch, insofern ist der Begriff Online Learning hier irreführend.</p>
+<p>Ein wichtiger Parameter ist die „learning rate“. Wie schnell werden gelernte Daten in die Vorhersagen implementiert.
+Bei einer hohen Lernrate werden „alte“ Daten schneller vergessen. Dies kann aber auch problematisch sein, wenn nur noch
+„schlechte“ Daten gelernt werden und die „guten“ Daten dann vergessen werden (also shit in – shit out).</p>
+<p>Zurück zu <a class="reference internal" href="#mltypes"><span class="std std-ref">Maschinelearning Typen</span></a></p>
+</div>
+<div class="section" id="instance-based-vs-model-based-learning">
+<h2>Instance Based vs. Model-Based Learning<a class="headerlink" href="#instance-based-vs-model-based-learning" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Frage der Generalisierung des Modells.</p>
+<p>Beim Instance based Learning wird anhand von positiv (negativ) Beispielen neue Werte gelernt, die ähnlich sind, wie die
+vorgegebenen Kategorien.</p>
+<p>Beim Model-based Learning wird ein Modell mit Hilfe von Algorithmen errechnet und Schätzungen erfolgen auf Basis der
+berechneten Funktionen.</p>
+<p>Zurück zu <a class="reference internal" href="#mltypes"><span class="std std-ref">Maschinelearning Typen</span></a></p>
+</div>
+<div class="section" id="scikit-learn-cheat-sheet">
+<h2>Scikit-Learn cheat sheet<a class="headerlink" href="#scikit-learn-cheat-sheet" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Welchen Algorithmus wende ich wann an: <a class="reference external" href="https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html">Scikit-Learn cheat sheet</a></p>
+<p>Zurück zu <a class="reference internal" href="#mltypes"><span class="std std-ref">Maschinelearning Typen</span></a></p>
+<dl class="simple">
+<dt>Quellen:</dt><dd><p>[Géron]: Hands-On Machine Learning with Scikit-Learn &amp; TensorFlow, Aurélien Géron, o’reilly, 2017, S. 26ff.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ML Mitschriften</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notationen</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Maschinelearning Typen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#semisupervised-learning">Semisupervised learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#batch-offline-learning">Batch / Offline Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#online-incremental-learning">Online / Incremental Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instance-based-vs-model-based-learning">Instance Based vs. Model-Based Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scikit-learn-cheat-sheet">Scikit-Learn cheat sheet</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="supervisedlearning.html">Supervised Learning</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="notation.html" title="vorheriges Kapitel">Notationen</a></li>
+      <li>Next: <a href="supervisedlearning.html" title="nächstes Kapitel">Supervised Learning</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Schnellsuche</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Los" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Arne Ziegler.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/mltypes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
