@@ -231,9 +231,72 @@ Schritt 3: :math:`\frac{dL}{dz}`
 
 :math:`\frac{dL}{dz} = \frac{a-y}{a(1-a)} \times a(1-a) = a-y`
 
+Vektorisierung der LR
+======================
+Ziel ist die Überführung der ML Algorithmen in ein Modell, wo die Vekororen/Matrizenrechnung angewandt werden kann.
+
+Bei LR wird jeder Vorhersagewert berechnet über
+
+:math:`z^{(i)}=w^{(T)}x^{(i)}+b`
+
+:math:`a^{(i)}=\sigma(z^{(i)})`
+
+Die Inputwerte werden in der Matrix X zusammengefasst:
+
+:math:`X=\begin{bmatrix} {\vdots \\ x^{(1)} \\ \vdots }
+{\vdots \\ x^{(2)} \\ \vdots }
+{\vdots \\ \dotsi \\ \vdots }
+{\vdots \\ x^{(n)} \\ \vdots }  \end{bmatrix}`
+
+z errechnet sich demnach durch:
+
+:math:`Z=[z^{(1)} \; \dotsi \; z^{(n)}]=w^TX+[b \; \dotsi \; b]=[w^Tx^{(1)}+b \; \dotsi \; w^Tx^{(n)}+b]`
+
+Bei Verwendung von numpy in Python: z=np.dot(w.T,X)+b.
+
+Analog geht man bei a vor, d.h. die Matrix A errechnet sich aus Sigma(Matrix Z):
+
+:math:`A=[a^{(1)} \; \dotsi \; a^{(n)}]=\sigma(Z)`
+
+Das Gradient Descence Verfahren kann ebenso vektorisiert werden. Es gilt:
+
+:math:`dz^{(1)}=a^{(1)}-y{(1)} \; \; \; dz^{(2)}=a^{(2)}-y^{(2)} \; ...`
+
+Ebenso kann A als Vektor zusammengefasst werden (siehe oben) und Y für die Traingssets. Daraus ergibt sich:
+
+:math:`dZ=[dz^{(1)} \; \dotsi \; dz^{(n)}] = A - Y`
+
+Implementierung Logistic Regression Algorithmus
+================================================
+
+Ohne Vektorisierung
+--------------------
+J=0, dw\ :sub:`1` \=0, dw\ :sub:`2` \=0, db=0
+
+for i = 1 to m
+
+    | :math:`z^{(i)}=w^{(T)}x^{(i)}+b`
+    | :math:`a^{(i)}=\sigma(z^{(i)})`
+    | :math:`J +=-[y^{(i)}log(a^{(i)})+(1-y^{(i)})log(1-a^{(i)})]`
+    | :math:`dz^{(i)}=a^{(i)}-y{(i)}`
+    | :math:`dw_1 \; += \; x^{(i)}_1 dz^{(i)}`
+    | :math:`dw_2 \; +=\; x^{(i)}_2 dz^{(i)}`
+    | :math:`db \; += \; dz^{(i)}`
+
+J /= m, dw\ :sub:`1` \ /=m, dw\ :sub:`2` \/=m, db/=m
+
+Mit Vektorisierung
+--------------------
+for i in range (Iteration)    # Anzahl der durchzührenden Iterationen bei Gradient Descence
+    | Z=np.dot(w.T,X)+b
+    | :math:`A=\sigma(Z)`
+    | dz=A-Y
+    | :math:`dw=\frac{1}{m}XdZ^T`
+    | :math:`db=\frac{1}{m}np.sum(dZ)`
+    | :math:`w := w-\alpha dw`
+    | :math:`b := b-\alpha db`
 
 Zurück zu :ref:`sl`
-
 
 Decision Trees
 **************

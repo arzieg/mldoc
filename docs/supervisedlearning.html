@@ -213,7 +213,63 @@ als <span class="math notranslate nohighlight">\(\sigma(u)=\frac{1}{u}\)</span> 
 <p>Schritt 3: <span class="math notranslate nohighlight">\(\frac{dL}{dz}\)</span></p>
 <p><span class="math notranslate nohighlight">\(\frac{dL}{dz}=\frac{dL}{da}\times\frac{da}{dz}\)</span></p>
 <p><span class="math notranslate nohighlight">\(\frac{dL}{dz} = \frac{a-y}{a(1-a)} \times a(1-a) = a-y\)</span></p>
+<div class="section" id="vektorisierung-der-lr">
+<h3>Vektorisierung der LR<a class="headerlink" href="#vektorisierung-der-lr" title="Link zu dieser Überschrift">¶</a></h3>
+<p>Ziel ist die Überführung der ML Algorithmen in ein Modell, wo die Vekororen/Matrizenrechnung angewandt werden kann.</p>
+<p>Bei LR wird jeder Vorhersagewert berechnet über</p>
+<p><span class="math notranslate nohighlight">\(z^{(i)}=w^{(T)}x^{(i)}+b\)</span></p>
+<p><span class="math notranslate nohighlight">\(a^{(i)}=\sigma(z^{(i)})\)</span></p>
+<p>Die Inputwerte werden in der Matrix X zusammengefasst:</p>
+<p><span class="math notranslate nohighlight">\(X=\begin{bmatrix} {\vdots \\ x^{(1)} \\ \vdots }
+{\vdots \\ x^{(2)} \\ \vdots }
+{\vdots \\ \dotsi \\ \vdots }
+{\vdots \\ x^{(n)} \\ \vdots }  \end{bmatrix}\)</span></p>
+<p>z errechnet sich demnach durch:</p>
+<p><span class="math notranslate nohighlight">\(Z=[z^{(1)} \; \dotsi \; z^{(n)}]=w^TX+[b \; \dotsi \; b]=[w^Tx^{(1)}+b \; \dotsi \; w^Tx^{(n)}+b]\)</span></p>
+<p>Bei Verwendung von numpy in Python: z=np.dot(w.T,X)+b.</p>
+<p>Analog geht man bei a vor, d.h. die Matrix A errechnet sich aus Sigma(Matrix Z):</p>
+<p><span class="math notranslate nohighlight">\(A=[a^{(1)} \; \dotsi \; a^{(n)}]=\sigma(Z)\)</span></p>
+<p>Das Gradient Descence Verfahren kann ebenso vektorisiert werden. Es gilt:</p>
+<p><span class="math notranslate nohighlight">\(dz^{(1)}=a^{(1)}-y{(1)} \; \; \; dz^{(2)}=a^{(2)}-y^{(2)} \; ...\)</span></p>
+<p>Ebenso kann A als Vektor zusammengefasst werden (siehe oben) und Y für die Traingssets. Daraus ergibt sich:</p>
+<p><span class="math notranslate nohighlight">\(dZ=[dz^{(1)} \; \dotsi \; dz^{(n)}] = A - Y\)</span></p>
+</div>
+<div class="section" id="implementierung-logistic-regression-algorithmus">
+<h3>Implementierung Logistic Regression Algorithmus<a class="headerlink" href="#implementierung-logistic-regression-algorithmus" title="Link zu dieser Überschrift">¶</a></h3>
+<div class="section" id="ohne-vektorisierung">
+<h4>Ohne Vektorisierung<a class="headerlink" href="#ohne-vektorisierung" title="Link zu dieser Überschrift">¶</a></h4>
+<p>J=0, dw<sub>1</sub> =0, dw<sub>2</sub> =0, db=0</p>
+<p>for i = 1 to m</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(z^{(i)}=w^{(T)}x^{(i)}+b\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(a^{(i)}=\sigma(z^{(i)})\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(J +=-[y^{(i)}log(a^{(i)})+(1-y^{(i)})log(1-a^{(i)})]\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(dz^{(i)}=a^{(i)}-y{(i)}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(dw_1 \; += \; x^{(i)}_1 dz^{(i)}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(dw_2 \; +=\; x^{(i)}_2 dz^{(i)}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(db \; += \; dz^{(i)}\)</span></div>
+</div>
+</div></blockquote>
+<p>J /= m, dw<sub>1</sub> /=m, dw<sub>2</sub> /=m, db/=m</p>
+</div>
+<div class="section" id="mit-vektorisierung">
+<h4>Mit Vektorisierung<a class="headerlink" href="#mit-vektorisierung" title="Link zu dieser Überschrift">¶</a></h4>
+<dl>
+<dt>for i in range (Iteration)    # Anzahl der durchzührenden Iterationen bei Gradient Descence</dt><dd><div class="line-block">
+<div class="line">Z=np.dot(w.T,X)+b</div>
+<div class="line"><span class="math notranslate nohighlight">\(A=\sigma(Z)\)</span></div>
+<div class="line">dz=A-Y</div>
+<div class="line"><span class="math notranslate nohighlight">\(dw=\frac{1}{m}XdZ^T\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(db=\frac{1}{m}np.sum(dZ)\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(w := w-\alpha dw\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(b := b-\alpha db\)</span></div>
+</div>
+</dd>
+</dl>
 <p>Zurück zu <a class="reference internal" href="#sl"><span class="std std-ref">Supervised Learning</span></a></p>
+</div>
+</div>
 </div>
 <div class="section" id="decision-trees">
 <h2>Decision Trees<a class="headerlink" href="#decision-trees" title="Link zu dieser Überschrift">¶</a></h2>
