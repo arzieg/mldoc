@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neuronale Netzwerke &#8212; ML Mitschriften 0.1 Dokumentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="prev" title="Supervised Learning" href="supervisedlearning.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="neuronale-netzwerke">
+<span id="nl-basic"></span><h1>Neuronale Netzwerke<a class="headerlink" href="#neuronale-netzwerke" title="Link zu dieser Überschrift">¶</a></h1>
+<dl class="simple">
+<dt><strong>Notation:</strong></dt><dd><p>Wichtig ist die Unterscheidung bei den hochgestellten [] - Klammern vs. den () - Klammern.
+Die [] Klammern beziehen sich auf den Layer innerhalb eine NN. Die ()-Klammern beziehen sich auf
+ein Element z.B. aus einem Trainingsset.</p>
+</dd>
+</dl>
+<p>Bei einem NN gibt es Inputwerte (x1, x2, …), Hidden-Layer (hier nur a1) und das Ergebnis a2 (bzw. y als Extra eingezeichnet).</p>
+<div class="graphviz"><img src="_images/graphviz-65fb52e58c5c3ce96e22b0d6047b71ee82828237.png" alt="digraph {
+    rankdir=LR;
+    &quot;x1&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;x2&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;x3&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a11&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true  ] ;
+    &quot;a12&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a13&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a2&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;y&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;x1&quot; -&gt; &quot;a11&quot;;
+    &quot;x1&quot; -&gt; &quot;a12&quot;;
+    &quot;x1&quot; -&gt; &quot;a13&quot;;
+    &quot;x2&quot; -&gt; &quot;a11&quot;;
+    &quot;x2&quot; -&gt; &quot;a12&quot;;
+    &quot;x2&quot; -&gt; &quot;a13&quot;;
+    &quot;x3&quot; -&gt; &quot;a11&quot;;
+    &quot;x3&quot; -&gt; &quot;a12&quot;;
+    &quot;x3&quot; -&gt; &quot;a13&quot;;
+    &quot;a11&quot; -&gt; &quot;a2&quot;;
+    &quot;a12&quot; -&gt; &quot;a2&quot;;
+    &quot;a13&quot; -&gt; &quot;a2&quot;;
+    &quot;a2&quot; -&gt; &quot;y&quot;;
+    { rank=same; &quot;x1&quot;, &quot;x2&quot;, &quot;x3&quot; }
+}" class="graphviz" /></div>
+<p>In jedem Hidden Layer wird z und a berechnet wie im Modell des Logistic Regression. Der Outputwert geht dann,
+je nach Definition als Inputwert in den Hidden Layer 2 usw.</p>
+<div class="graphviz"><img src="_images/graphviz-03f40e62c2477264853bbb84f0ec18818b4afadb.png" alt="digraph NN {
+
+    node [shape=record];
+    rankdir=LR;
+    &quot;x&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, label=&quot;x&quot; ] ;
+    &quot;W&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, label=&quot;W&quot; ] ;
+    &quot;b&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, label=&quot;b&quot; ] ;
+    &quot;z1&quot; [shape=record  , regular=1,style=filled,fillcolor=white, width=1.75, height=0.5, fixedsize=true, label=&quot;z[1]=W[1]x+b[1]&quot;] ;
+    &quot;a1&quot; [shape=record  , regular=1,style=filled,fillcolor=white, width=1.75, height=0.5, fixedsize=true,label=&quot;a[1]=sigma(z[1])&quot;] ;
+    &quot;z2&quot; [shape=record  , regular=1,style=filled,fillcolor=white, width=1.75, height=0.5, fixedsize=true,label=&quot;z[2]=W[2]a[1]+b[2]&quot;   ] ;
+    &quot;a2&quot; [shape=record  , regular=1,style=filled,fillcolor=white, width=1.75, height=0.5, fixedsize=true,label=&quot;a[2]=sigma(z[2])&quot;] ;
+    &quot;L&quot; [shape=record  , regular=1,style=filled,fillcolor=white, width=1.75, height=0.5, fixedsize=true,label=&quot;L(a[2],y)&quot;  ] ;
+
+    &quot;x&quot; -&gt; &quot;z1&quot;;
+    &quot;W&quot; -&gt; &quot;z1&quot;;
+    &quot;b&quot; -&gt; &quot;z1&quot;;
+    &quot;z1&quot; -&gt; &quot;a1&quot; -&gt; &quot;z2&quot; -&gt; &quot;a2&quot; -&gt; &quot;L&quot;
+
+    { rank=same; &quot;x&quot;, &quot;W&quot;, &quot;b&quot; }
+
+    subgraph cluster_R1 {
+      label=&quot;Hidden Layer 1&quot;
+      z1 ;
+      a1 ;
+    }
+
+    subgraph cluster_R2 {
+      label=&quot;Output&quot;
+      z2 ;
+      a2 ;
+    }
+
+}" class="graphviz" /></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ML Mitschriften</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mltypes.html">Maschinelearning Typen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervisedlearning.html">Supervised Learning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Neuronale Netzwerke</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="supervisedlearning.html" title="vorheriges Kapitel">Supervised Learning</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Schnellsuche</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Los" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, arzieg.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/nn_basic.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
