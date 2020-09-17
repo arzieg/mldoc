@@ -104,6 +104,63 @@ je nach Definition als Inputwert in den Hidden Layer 2 usw.</p>
     }
 
 }" class="graphviz" /></div>
+<p>oder für alle m Trainingswerte (Achtung: []=Hidden Layer, ()=Trainingsexample):</p>
+<blockquote>
+<div><dl>
+<dt>for i = 1 to m:</dt><dd><div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(z^{[1](i)}=W^{[1]}x^{(i)}+b^{[1]}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(a^{[1](i)}=\sigma(z^{[1](i)})\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(z^{[2](i)}=W^{[2]}a^{[1](i)}+b^{[2]}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(a^{[2](i)}=\sigma(z^{[2](i)})\)</span></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>bzw. als Vektorschreibweise:</dt><dd><div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(Z^{[i]}=W^{[1]}X+b^{[i]}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(A^{[i]}=\sigma(Z^{[i]})\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(Z^{[2]}=W^{[2]}A^{[1]}+b^{[2]}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(A^{[2]}=\sigma(Z^{[2]})\)</span></div>
+</div>
+</dd>
+</dl>
+<div class="section" id="aktivierungsfunktionen">
+<h2>Aktivierungsfunktionen:<a class="headerlink" href="#aktivierungsfunktionen" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Bisher wurde die Sigmoid-Aktivierungsfunktion verwendet. Es macht bei NN Sinn, häufig andere Aktivierungsfunktionen zu
+verwenden. Empfohlen wird alle gängigen Aktivierungsfunktion beim eigenen NN Modell auszuprobieren, welche besser
+funktioniert.</p>
+<p>Gängige Aktivierungsfunktion:</p>
+<p><strong>Sigmoid</strong> Funktion - wird häufig nicht mehr verwendet in NN (außer im Outputlayer).</p>
+<p><span class="math notranslate nohighlight">\(a=\frac{1}{1+e^{-z}}\)</span></p>
+<div class="figure align-center" id="id1">
+<span id="nn-001-sigmoid-graph"></span><a class="reference internal image-reference" href="_images/nn_001_sigmoid_graph.png"><img alt="Sigmoid Function" src="_images/nn_001_sigmoid_graph.png" style="width: 1047.0px; height: 523.0px;" /></a>
+<p class="caption"><span class="caption-number">Abb. 2: </span><span class="caption-text"><a class="reference internal" href="#nn-001-sigmoid-graph"><span class="std std-numref">Sigmoid Function (Abb. 2)</span></a></span><a class="headerlink" href="#id1" title="Link zu diesem Bild">¶</a></p>
+</div>
+<p><strong>tanh(z)</strong> - Funktion (arbeitet i.d.R. besser als die Sigmoid-Funktion, da er durch den Nullpunkt geht im Gegensatz zu
+der Sigmoid-Funktion, die den Nullwert bei 0.5 hat). Für den Outputlayer ist es sinnvoll, die Sidmoid-Funktion zu
+nutzen, für die Hidden-Layer die tanh-Aktivierungsfunktion.</p>
+<p><span class="math notranslate nohighlight">\(a=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}\)</span></p>
+<div class="figure align-center" id="id2">
+<span id="nn-002-tanh-graph"></span><a class="reference internal image-reference" href="_images/nn_002_tanh_graph.png"><img alt="tanh Function" src="_images/nn_002_tanh_graph.png" style="width: 1047.0px; height: 523.0px;" /></a>
+<p class="caption"><span class="caption-number">Abb. 3: </span><span class="caption-text"><a class="reference internal" href="#nn-002-tanh-graph"><span class="std std-numref">tanh Function (Abb. 3)</span></a></span><a class="headerlink" href="#id2" title="Link zu diesem Bild">¶</a></p>
+</div>
+<p><strong>RelU (Rectified Linear Unit)</strong> Funktion. Die Ableitung ist 1, wenn z&gt;0 bzw. 0 wenn z&lt;0.
+Vorteile: Einfache Anwendung und leichte Berechnung (im Gegensatz zu Sigmoid/tanh)
+Nachteil: Beim „Lernen“ kann es vorkommen, dass der Wert bei 0 verharrt und damit kein „Lernen“ stattfindet.</p>
+<p><span class="math notranslate nohighlight">\(a=max(0,z)\)</span></p>
+<div class="figure align-center" id="id3">
+<span id="nn-003-relu-graph"></span><a class="reference internal image-reference" href="_images/nn_003_relu_graph.png"><img alt="RelU Function" src="_images/nn_003_relu_graph.png" style="width: 1047.0px; height: 523.0px;" /></a>
+<p class="caption"><span class="caption-number">Abb. 4: </span><span class="caption-text"><a class="reference internal" href="#nn-003-relu-graph"><span class="std std-numref">RelU Function (Abb. 4)</span></a></span><a class="headerlink" href="#id3" title="Link zu diesem Bild">¶</a></p>
+</div>
+<p><strong>leaky RelU</strong> - wenn z&lt;0, dann ist die Ableitung negativ und nicht 0 wie bei RelU. Dies hilft beim
+Gradient Descent Verfahren (hebt den Nachteil von RelU auf).</p>
+<p><span class="math notranslate nohighlight">\(a=max(0.01z,z)\)</span></p>
+<div class="figure align-center" id="id4">
+<span id="nn-004-lrelu-graph"></span><a class="reference internal image-reference" href="_images/nn_004_lrelu_graph.png"><img alt="Leaky RelU Function" src="_images/nn_004_lrelu_graph.png" style="width: 1047.0px; height: 523.0px;" /></a>
+<p class="caption"><span class="caption-number">Abb. 5: </span><span class="caption-text"><a class="reference internal" href="#nn-004-lrelu-graph"><span class="std std-numref">Leaky RelU Function (Abb. 5)</span></a></span><a class="headerlink" href="#id4" title="Link zu diesem Bild">¶</a></p>
+</div>
+</div>
 </div>
 
 
@@ -128,7 +185,10 @@ je nach Definition als Inputwert in den Hidden Layer 2 usw.</p>
 <li class="toctree-l1"><a class="reference internal" href="notation.html">Notationen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mltypes.html">Maschinelearning Typen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="supervisedlearning.html">Supervised Learning</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Neuronale Netzwerke</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Neuronale Netzwerke</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aktivierungsfunktionen">Aktivierungsfunktionen:</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">

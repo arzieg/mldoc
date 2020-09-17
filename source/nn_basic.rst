@@ -77,3 +77,82 @@ je nach Definition als Inputwert in den Hidden Layer 2 usw.
         }
 
     }
+
+oder für alle m Trainingswerte (Achtung: []=Hidden Layer, ()=Trainingsexample):
+
+    for i = 1 to m:
+        | :math:`z^{[1](i)}=W^{[1]}x^{(i)}+b^{[1]}`
+        | :math:`a^{[1](i)}=\sigma(z^{[1](i)})`
+        | :math:`z^{[2](i)}=W^{[2]}a^{[1](i)}+b^{[2]}`
+        | :math:`a^{[2](i)}=\sigma(z^{[2](i)})`
+
+bzw. als Vektorschreibweise:
+    | :math:`Z^{[i]}=W^{[1]}X+b^{[i]}`
+    | :math:`A^{[i]}=\sigma(Z^{[i]})`
+    | :math:`Z^{[2]}=W^{[2]}A^{[1]}+b^{[2]}`
+    | :math:`A^{[2]}=\sigma(Z^{[2]})`
+
+Aktivierungsfunktionen:
+=======================
+Bisher wurde die Sigmoid-Aktivierungsfunktion verwendet. Es macht bei NN Sinn, häufig andere Aktivierungsfunktionen zu
+verwenden. Empfohlen wird alle gängigen Aktivierungsfunktion beim eigenen NN Modell auszuprobieren, welche besser
+funktioniert.
+
+Gängige Aktivierungsfunktion:
+
+**Sigmoid** Funktion - wird häufig nicht mehr verwendet in NN (außer im Outputlayer).
+
+:math:`a=\frac{1}{1+e^{-z}}`
+
+.. _nn_001_sigmoid_graph:
+
+.. figure:: pic/nn_001_sigmoid_graph.png
+    :scale: 50%
+    :alt: Sigmoid Function
+    :align: center
+
+    :numref:`Sigmoid Function (Abb. %s)  <nn_001_sigmoid_graph>`
+
+**tanh(z)** - Funktion (arbeitet i.d.R. besser als die Sigmoid-Funktion, da er durch den Nullpunkt geht im Gegensatz zu
+der Sigmoid-Funktion, die den Nullwert bei 0.5 hat). Für den Outputlayer ist es sinnvoll, die Sidmoid-Funktion zu
+nutzen, für die Hidden-Layer die tanh-Aktivierungsfunktion.
+
+:math:`a=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}`
+
+.. _nn_002_tanh_graph:
+
+.. figure:: pic/nn_002_tanh_graph.png
+    :scale: 50%
+    :alt: tanh Function
+    :align: center
+
+    :numref:`tanh Function (Abb. %s)  <nn_002_tanh_graph>`
+
+**RelU (Rectified Linear Unit)** Funktion. Die Ableitung ist 1, wenn z>0 bzw. 0 wenn z<0.
+Vorteile: Einfache Anwendung und leichte Berechnung (im Gegensatz zu Sigmoid/tanh)
+Nachteil: Beim "Lernen" kann es vorkommen, dass der Wert bei 0 verharrt und damit kein "Lernen" stattfindet.
+
+:math:`a=max(0,z)`
+
+.. _nn_003_relu_graph:
+
+.. figure:: pic/nn_003_relu_graph.png
+    :scale: 50%
+    :alt: RelU Function
+    :align: center
+
+    :numref:`RelU Function (Abb. %s)  <nn_003_relu_graph>`
+
+**leaky RelU** - wenn z<0, dann ist die Ableitung negativ und nicht 0 wie bei RelU. Dies hilft beim
+Gradient Descent Verfahren (hebt den Nachteil von RelU auf).
+
+:math:`a=max(0.01z,z)`
+
+.. _nn_004_lrelu_graph:
+
+.. figure:: pic/nn_004_lrelu_graph.png
+    :scale: 50%
+    :alt: Leaky RelU Function
+    :align: center
+
+    :numref:`Leaky RelU Function (Abb. %s)  <nn_004_lrelu_graph>`
