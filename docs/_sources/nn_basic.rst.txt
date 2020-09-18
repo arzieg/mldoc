@@ -102,7 +102,8 @@ Gängige Aktivierungsfunktion:
 
 **Sigmoid** Funktion - wird häufig nicht mehr verwendet in NN (außer im Outputlayer).
 
-:math:`a=\frac{1}{1+e^{-z}}`
+| :math:`g(z)=a=\frac{1}{1+e^{-z}}`
+| :math:`\frac{d}{dz}g(z)=\frac{1}{1+e^{-z}}(1-\frac{1}{1+e^{-z}})=g(z)(1-g(z))=a-(1-a)`
 
 .. _nn_001_sigmoid_graph:
 
@@ -117,7 +118,8 @@ Gängige Aktivierungsfunktion:
 der Sigmoid-Funktion, die den Nullwert bei 0.5 hat). Für den Outputlayer ist es sinnvoll, die Sidmoid-Funktion zu
 nutzen, für die Hidden-Layer die tanh-Aktivierungsfunktion.
 
-:math:`a=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}`
+| :math:`g(z)=a=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}`
+| :math:`\frac{d}{dz}g(z)=1-(tanh(z))^2=1-a^2`
 
 .. _nn_002_tanh_graph:
 
@@ -132,7 +134,14 @@ nutzen, für die Hidden-Layer die tanh-Aktivierungsfunktion.
 Vorteile: Einfache Anwendung und leichte Berechnung (im Gegensatz zu Sigmoid/tanh)
 Nachteil: Beim "Lernen" kann es vorkommen, dass der Wert bei 0 verharrt und damit kein "Lernen" stattfindet.
 
-:math:`a=max(0,z)`
+| :math:`g(z)=a=max(0,z)`
+| :math:`\begin{equation}
+            \frac{d}{dz}g(z)= \begin{cases}
+                        0 \text{ wenn z < 0 } \\
+                        1 \text{ wenn z > 0 } \\
+                        undef \text{ wenn z = 0 }
+                     \end{cases}
+         \end{equation}`
 
 .. _nn_003_relu_graph:
 
@@ -146,7 +155,13 @@ Nachteil: Beim "Lernen" kann es vorkommen, dass der Wert bei 0 verharrt und dami
 **leaky RelU** - wenn z<0, dann ist die Ableitung negativ und nicht 0 wie bei RelU. Dies hilft beim
 Gradient Descent Verfahren (hebt den Nachteil von RelU auf).
 
-:math:`a=max(0.01z,z)`
+| :math:`a=max(0.01z,z)`
+| :math:`\begin{equation}
+            \frac{d}{dz}g(z)= \begin{cases}
+                        0.01 \text{ wenn z < 0 } \\
+                        1 \text{ wenn z } \geq \; 0
+                     \end{cases}
+         \end{equation}`
 
 .. _nn_004_lrelu_graph:
 

@@ -132,7 +132,10 @@ verwenden. Empfohlen wird alle gängigen Aktivierungsfunktion beim eigenen NN Mo
 funktioniert.</p>
 <p>Gängige Aktivierungsfunktion:</p>
 <p><strong>Sigmoid</strong> Funktion - wird häufig nicht mehr verwendet in NN (außer im Outputlayer).</p>
-<p><span class="math notranslate nohighlight">\(a=\frac{1}{1+e^{-z}}\)</span></p>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(g(z)=a=\frac{1}{1+e^{-z}}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\frac{d}{dz}g(z)=\frac{1}{1+e^{-z}}(1-\frac{1}{1+e^{-z}})=g(z)(1-g(z))=a-(1-a)\)</span></div>
+</div>
 <div class="figure align-center" id="id1">
 <span id="nn-001-sigmoid-graph"></span><a class="reference internal image-reference" href="_images/nn_001_sigmoid_graph.png"><img alt="Sigmoid Function" src="_images/nn_001_sigmoid_graph.png" style="width: 1047.0px; height: 523.0px;" /></a>
 <p class="caption"><span class="caption-number">Abb. 2: </span><span class="caption-text"><a class="reference internal" href="#nn-001-sigmoid-graph"><span class="std std-numref">Sigmoid Function (Abb. 2)</span></a></span><a class="headerlink" href="#id1" title="Link zu diesem Bild">¶</a></p>
@@ -140,7 +143,10 @@ funktioniert.</p>
 <p><strong>tanh(z)</strong> - Funktion (arbeitet i.d.R. besser als die Sigmoid-Funktion, da er durch den Nullpunkt geht im Gegensatz zu
 der Sigmoid-Funktion, die den Nullwert bei 0.5 hat). Für den Outputlayer ist es sinnvoll, die Sidmoid-Funktion zu
 nutzen, für die Hidden-Layer die tanh-Aktivierungsfunktion.</p>
-<p><span class="math notranslate nohighlight">\(a=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}\)</span></p>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(g(z)=a=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\frac{d}{dz}g(z)=1-(tanh(z))^2=1-a^2\)</span></div>
+</div>
 <div class="figure align-center" id="id2">
 <span id="nn-002-tanh-graph"></span><a class="reference internal image-reference" href="_images/nn_002_tanh_graph.png"><img alt="tanh Function" src="_images/nn_002_tanh_graph.png" style="width: 1047.0px; height: 523.0px;" /></a>
 <p class="caption"><span class="caption-number">Abb. 3: </span><span class="caption-text"><a class="reference internal" href="#nn-002-tanh-graph"><span class="std std-numref">tanh Function (Abb. 3)</span></a></span><a class="headerlink" href="#id2" title="Link zu diesem Bild">¶</a></p>
@@ -148,14 +154,31 @@ nutzen, für die Hidden-Layer die tanh-Aktivierungsfunktion.</p>
 <p><strong>RelU (Rectified Linear Unit)</strong> Funktion. Die Ableitung ist 1, wenn z&gt;0 bzw. 0 wenn z&lt;0.
 Vorteile: Einfache Anwendung und leichte Berechnung (im Gegensatz zu Sigmoid/tanh)
 Nachteil: Beim „Lernen“ kann es vorkommen, dass der Wert bei 0 verharrt und damit kein „Lernen“ stattfindet.</p>
-<p><span class="math notranslate nohighlight">\(a=max(0,z)\)</span></p>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(g(z)=a=max(0,z)\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\begin{equation}
+   \frac{d}{dz}g(z)= \begin{cases}
+               0 \text{ wenn z &lt; 0 } \\
+               1 \text{ wenn z &gt; 0 } \\
+               undef \text{ wenn z = 0 }
+            \end{cases}
+\end{equation}\)</span></div>
+</div>
 <div class="figure align-center" id="id3">
 <span id="nn-003-relu-graph"></span><a class="reference internal image-reference" href="_images/nn_003_relu_graph.png"><img alt="RelU Function" src="_images/nn_003_relu_graph.png" style="width: 1047.0px; height: 523.0px;" /></a>
 <p class="caption"><span class="caption-number">Abb. 4: </span><span class="caption-text"><a class="reference internal" href="#nn-003-relu-graph"><span class="std std-numref">RelU Function (Abb. 4)</span></a></span><a class="headerlink" href="#id3" title="Link zu diesem Bild">¶</a></p>
 </div>
 <p><strong>leaky RelU</strong> - wenn z&lt;0, dann ist die Ableitung negativ und nicht 0 wie bei RelU. Dies hilft beim
 Gradient Descent Verfahren (hebt den Nachteil von RelU auf).</p>
-<p><span class="math notranslate nohighlight">\(a=max(0.01z,z)\)</span></p>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(a=max(0.01z,z)\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\begin{equation}
+   \frac{d}{dz}g(z)= \begin{cases}
+               0.01 \text{ wenn z &lt; 0 } \\
+               1 \text{ wenn z } \geq \; 0
+            \end{cases}
+\end{equation}\)</span></div>
+</div>
 <div class="figure align-center" id="id4">
 <span id="nn-004-lrelu-graph"></span><a class="reference internal image-reference" href="_images/nn_004_lrelu_graph.png"><img alt="Leaky RelU Function" src="_images/nn_004_lrelu_graph.png" style="width: 1047.0px; height: 523.0px;" /></a>
 <p class="caption"><span class="caption-number">Abb. 5: </span><span class="caption-text"><a class="reference internal" href="#nn-004-lrelu-graph"><span class="std std-numref">Leaky RelU Function (Abb. 5)</span></a></span><a class="headerlink" href="#id4" title="Link zu diesem Bild">¶</a></p>
