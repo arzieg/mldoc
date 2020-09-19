@@ -3,11 +3,16 @@
 ###################
 Neuronale Netzwerke
 ###################
+*Quelle: Andrew Ng, Neural Networks and Deep Learning, Coursera, 2020*
 
 **Notation:**
     Wichtig ist die Unterscheidung bei den hochgestellten [] - Klammern vs. den () - Klammern.
     Die [] Klammern beziehen sich auf den Layer innerhalb eine NN. Die ()-Klammern beziehen sich auf
     ein Element z.B. aus einem Trainingsset.
+
+NN Logistic Regression
+***********************
+Andrew Ng. erarbeitet die Einführung in ein NN am Beispiel des Logistic Regression Algorithmus.
 
 Bei einem NN gibt es Inputwerte (x1, x2, ...), Hidden-Layer (hier nur a1) und das Ergebnis a2 (bzw. y als Extra eingezeichnet).
 
@@ -39,8 +44,8 @@ Bei einem NN gibt es Inputwerte (x1, x2, ...), Hidden-Layer (hier nur a1) und da
         { rank=same; "x1", "x2", "x3" }
     }
 
-In jedem Hidden Layer wird z und a berechnet wie im Modell des Logistic Regression. Der Outputwert geht dann,
-je nach Definition als Inputwert in den Hidden Layer 2 usw.
+In jedem Hidden Layer wird z und a (Aktvierungsfunktion) berechnet wie im Modell des Logistic Regression.
+Der Outputwert geht dann, je nach Definition als Inputwert in den Hidden Layer 2 usw.
 
 .. graphviz::
 
@@ -94,7 +99,7 @@ bzw. als Vektorschreibweise:
 
 Aktivierungsfunktionen:
 =======================
-Bisher wurde die Sigmoid-Aktivierungsfunktion verwendet. Es macht bei NN Sinn, häufig andere Aktivierungsfunktionen zu
+Bisher wurde die Sigmoid-Aktivierungsfunktion verwendet. Es macht bei NN Sinn andere Aktivierungsfunktionen zu
 verwenden. Empfohlen wird alle gängigen Aktivierungsfunktion beim eigenen NN Modell auszuprobieren, welche besser
 funktioniert.
 
@@ -171,3 +176,26 @@ Gradient Descent Verfahren (hebt den Nachteil von RelU auf).
     :align: center
 
     :numref:`Leaky RelU Function (Abb. %s)  <nn_004_lrelu_graph>`
+
+Forward Propagation
+===================
+Analog zu dem Logistic Regression Algorithmus berechnet sich die Forward Propagation für ein NN
+wie folgt:
+
+    | :math:`Z^{[1]}=W^{[1]}X+b^{[1]}`
+    | :math:`A^{[1]}=g^{[1]}(Z^{[1]})`
+    | :math:`Z^{[2]}=W^{[2]}A^{[1]}+b^{[2]}`
+    | :math:`A^{[2]}=g^{[2]}(Z^{[2]})=\sigma(Z^{[2]})`
+
+Backward Propagation
+=====================
+
+    | :math:`dZ^{[2]}=A^{[2]}-Y`
+    | :math:`dW^{[2]}=\frac{1}{m}dZ^{[2]}A^{[1]T}`
+    | :math:`db^{[2]}=\frac{1}{m}np.sum(dZ^{[2]}, axis=1, keepdims=true)`
+    | :math:`dZ^{[1]}=dW^{[2]T}dZ^{[2]}*g^{[1]'}(Z^{[1]})`
+    | :math:`dW^{[1]}=\frac{1}{m}dZ^{[1]}X^{T}`
+    | :math:`db^{[1]}=\frac{1}{m}np.sum(dZ^{[1]}, axis=1, keepdims=true)`
+
+
+
