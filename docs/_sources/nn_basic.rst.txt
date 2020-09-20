@@ -197,5 +197,18 @@ Backward Propagation
     | :math:`dW^{[1]}=\frac{1}{m}dZ^{[1]}X^{T}`
     | :math:`db^{[1]}=\frac{1}{m}np.sum(dZ^{[1]}, axis=1, keepdims=true)`
 
+Initialisierung dues NN
+=======================
+Bei der Initialisierung des NN ist die Matrix W und der Vektor b mit Werten vorzubelegen. Man kann zeigen, dass
+b ein Null-Vektor sein kann, W sollte aber mit Zufallszahlen initialisiert werden. Wenn W ebenfalls eine Null-Matrix
+ist, würde bei der Backpropagation symmetrische Werte errechnet werden zw. den Hidden-Layern (so dass man eigentlich
+das Modell auf ein Hidden Layer reduzieren kann.)
+Bei der Initialisierung ist weiterhin darauf zu achten, dass die W-Matrix mit kleinen Werten initialisiert wird.
+Dies liegt daran, dass die Aktivierungsfunktion bei > 1 oder < 1 bereits auf einen Wert limitiert wird (0 oder 1).
+Um hier eine hohe Variabilität zu haben, sollten die Werte für W -1 < w < 1 sein.
+
+| :math:`w^{[1]}=np.random.rand(2,2)*0.01` (anstelle von 0.01 kann auch ein anderer kleiner Wert genommen werden).
+| :math:`w^{[2]}=np.random.rand(1,2)*0.01` (anstelle von 0.01 kann auch ein anderer kleiner Wert genommen werden).
+
 
 
