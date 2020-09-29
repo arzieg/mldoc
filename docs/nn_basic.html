@@ -194,23 +194,20 @@ Gradient Descent Verfahren (hebt den Nachteil von RelU auf).</p>
 wie folgt:</p>
 <blockquote>
 <div><div class="line-block">
-<div class="line"><span class="math notranslate nohighlight">\(Z^{[1]}=W^{[1]}X+b^{[1]}\)</span></div>
-<div class="line"><span class="math notranslate nohighlight">\(A^{[1]}=g^{[1]}(Z^{[1]})\)</span></div>
-<div class="line"><span class="math notranslate nohighlight">\(Z^{[2]}=W^{[2]}A^{[1]}+b^{[2]}\)</span></div>
-<div class="line"><span class="math notranslate nohighlight">\(A^{[2]}=g^{[2]}(Z^{[2]})=\sigma(Z^{[2]})\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(Z^{[l]}=W^{[l]}A^{[l-1]}+b^{[l]}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(A^{[l]}=g^{[l]}(Z^{[l]})=\sigma(Z^{[l]})\)</span></div>
 </div>
 </div></blockquote>
+<p>Man beachte: X im Layer 0 kann auch als <span class="math notranslate nohighlight">\(A^{[0]}\)</span> bezeichnet werden.</p>
 </div>
 <div class="section" id="backward-propagation">
 <h3>Backward Propagation<a class="headerlink" href="#backward-propagation" title="Link zu dieser Überschrift">¶</a></h3>
 <blockquote>
 <div><div class="line-block">
-<div class="line"><span class="math notranslate nohighlight">\(dZ^{[2]}=A^{[2]}-Y\)</span></div>
-<div class="line"><span class="math notranslate nohighlight">\(dW^{[2]}=\frac{1}{m}dZ^{[2]}A^{[1]T}\)</span></div>
-<div class="line"><span class="math notranslate nohighlight">\(db^{[2]}=\frac{1}{m}np.sum(dZ^{[2]}, axis=1, keepdims=true)\)</span></div>
-<div class="line"><span class="math notranslate nohighlight">\(dZ^{[1]}=dW^{[2]T}dZ^{[2]}*g^{[1]'}(Z^{[1]})\)</span></div>
-<div class="line"><span class="math notranslate nohighlight">\(dW^{[1]}=\frac{1}{m}dZ^{[1]}X^{T}\)</span></div>
-<div class="line"><span class="math notranslate nohighlight">\(db^{[1]}=\frac{1}{m}np.sum(dZ^{[1]}, axis=1, keepdims=true)\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(dZ^{[l]}=dA^{[l]}*g^{[l]'}(Z^{[l]})\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(dW^{[l]}=\frac{1}{m}dZ^{[l]}A^{[l-1]T}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(db^{[l]}=\frac{1}{m}np.sum(dZ^{[l]}, axis=1, keepdims=true)\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(dA^{[l-1]}=W^{[l]T}dZ^{[l]}\)</span></div>
 </div>
 </div></blockquote>
 </div>
@@ -227,7 +224,19 @@ Um hier eine hohe Variabilität zu haben, sollten die Werte für W -1 &lt; w &lt
 <div class="line"><span class="math notranslate nohighlight">\(w^{[1]}=np.random.rand(2,2)*0.01\)</span> (anstelle von 0.01 kann auch ein anderer kleiner Wert genommen werden).</div>
 <div class="line"><span class="math notranslate nohighlight">\(w^{[2]}=np.random.rand(1,2)*0.01\)</span> (anstelle von 0.01 kann auch ein anderer kleiner Wert genommen werden).</div>
 </div>
-<p>Video38</p>
+</div>
+<div class="section" id="hyperparameter">
+<h3>Hyperparameter<a class="headerlink" href="#hyperparameter" title="Link zu dieser Überschrift">¶</a></h3>
+<p>Ein NN wird nicht nur durch die Funktionen beeinflusst sondern auch von anderen Parametern, z.B.</p>
+<ul class="simple">
+<li><p>Learning Rate Alpha</p></li>
+<li><p>Anzahl Iterationen</p></li>
+<li><p>Anzahl Hidden Layer N</p></li>
+<li><p>Anzahl Hidden Units</p></li>
+<li><p>Wahl der Aktivierungsfunktionen</p></li>
+</ul>
+<p>Diese Werte werdem in einem NN definiert und werden als Hyperparameter bezeichnet. Sie kontrollieren die
+Berechnung von W und b.</p>
 </div>
 </div>
 </div>

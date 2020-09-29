@@ -182,20 +182,19 @@ Forward Propagation
 Analog zu dem Logistic Regression Algorithmus berechnet sich die Forward Propagation für ein NN
 wie folgt:
 
-    | :math:`Z^{[1]}=W^{[1]}X+b^{[1]}`
-    | :math:`A^{[1]}=g^{[1]}(Z^{[1]})`
-    | :math:`Z^{[2]}=W^{[2]}A^{[1]}+b^{[2]}`
-    | :math:`A^{[2]}=g^{[2]}(Z^{[2]})=\sigma(Z^{[2]})`
+    | :math:`Z^{[l]}=W^{[l]}A^{[l-1]}+b^{[l]}`
+    | :math:`A^{[l]}=g^{[l]}(Z^{[l]})=\sigma(Z^{[l]})`
+
+Man beachte: X im Layer 0 kann auch als :math:`A^{[0]}` bezeichnet werden.
 
 Backward Propagation
 =====================
 
-    | :math:`dZ^{[2]}=A^{[2]}-Y`
-    | :math:`dW^{[2]}=\frac{1}{m}dZ^{[2]}A^{[1]T}`
-    | :math:`db^{[2]}=\frac{1}{m}np.sum(dZ^{[2]}, axis=1, keepdims=true)`
-    | :math:`dZ^{[1]}=dW^{[2]T}dZ^{[2]}*g^{[1]'}(Z^{[1]})`
-    | :math:`dW^{[1]}=\frac{1}{m}dZ^{[1]}X^{T}`
-    | :math:`db^{[1]}=\frac{1}{m}np.sum(dZ^{[1]}, axis=1, keepdims=true)`
+    | :math:`dZ^{[l]}=dA^{[l]}*g^{[l]'}(Z^{[l]})`
+    | :math:`dW^{[l]}=\frac{1}{m}dZ^{[l]}A^{[l-1]T}`
+    | :math:`db^{[l]}=\frac{1}{m}np.sum(dZ^{[l]}, axis=1, keepdims=true)`
+    | :math:`dA^{[l-1]}=W^{[l]T}dZ^{[l]}`
+
 
 Initialisierung des NN
 =======================
@@ -210,4 +209,18 @@ Um hier eine hohe Variabilität zu haben, sollten die Werte für W -1 < w < 1 se
 | :math:`w^{[1]}=np.random.rand(2,2)*0.01` (anstelle von 0.01 kann auch ein anderer kleiner Wert genommen werden).
 | :math:`w^{[2]}=np.random.rand(1,2)*0.01` (anstelle von 0.01 kann auch ein anderer kleiner Wert genommen werden).
 
-Video38
+Hyperparameter
+===============
+Ein NN wird nicht nur durch die Funktionen beeinflusst sondern auch von anderen Parametern, z.B.
+
+* Learning Rate Alpha
+* Anzahl Iterationen
+* Anzahl Hidden Layer N
+* Anzahl Hidden Units
+* Wahl der Aktivierungsfunktionen
+
+Diese Werte werdem in einem NN definiert und werden als Hyperparameter bezeichnet. Sie kontrollieren die
+Berechnung von W und b.
+
+
+
