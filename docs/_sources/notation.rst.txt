@@ -20,7 +20,11 @@ Dimensionen
 +-------------------------------------+----------------------------------------------------+
 | n\ :sub:`y`                         | Ergebnisse                                         |
 +-------------------------------------+----------------------------------------------------+
-| :math:`n ^{\text{[l]}}_{\text{h}}`  |  Anzahl der Hidden Einheiten im l-ten Layer        |
+| :math:`n ^{\text{[l]}}_{\text{h}}`  | Anzahl der Hidden Einheiten im l-ten Layer         |
++-------------------------------------+----------------------------------------------------+
+| :math:`a ^{\text{[l]}}`             | Aktivierungsfunktionen im Layer l                  |
++-------------------------------------+----------------------------------------------------+
+| :math:`w ^{\text{[l]}}`             | Gewichtungen im Layer l                            |
 +-------------------------------------+----------------------------------------------------+
 | In einer for - Schleife ist auch folgende Schreibweise möglich                           |
 | :math:`n_x = n ^{\text{[0]}}_{\text{h}}` und                                             |
@@ -70,3 +74,25 @@ Beispiele für Kostenfunktionen
 
 Zurück zu :ref:`notation`
 
+Matrixdimensionen
+=================
+Bei der Berechnung eines NN vektorisiert man die einzelnen Variablen im Modell. Beim Debuggen ist es hilfreich,
+wenn die Dimensionen der Matritzen je Layer bekannt sind.
+
+Es gilt:
+
++--------------------------------------------+---------------------------------------------------------------+
+| **Vektor**                                 | **Matrixdimension je Layer**                                  |
++--------------------------------------------+---------------------------------------------------------------+
+| Gewichtungsfaktor w                        | :math:`w ^{\text{[l]}} : (n^{\text{[l]}},n^{\text{[l-1]}})`   |
++--------------------------------------------+---------------------------------------------------------------+
+| Änderung von Gewichtungsfaktor w           | :math:`dw ^{\text{[l]}} : (n^{\text{[l]}},n^{\text{[l-1]}})`  |
++--------------------------------------------+---------------------------------------------------------------+
+| Bias b                                     | :math:`b^{\text{[l]}} : (b^{\text{[l]}},1)`                   |
++--------------------------------------------+---------------------------------------------------------------+
+| Änderung von bias b                        | :math:`db^{\text{[l]}} : (b^{\text{[l]}},1)`                  |
++--------------------------------------------+---------------------------------------------------------------+
+| Aktivierungsfkt. A und Funktion Z          | :math:`Z^{\text{[l]}}, A^{\text{[l]}} : (n^{\text{[l]}},m)`   |
++--------------------------------------------+---------------------------------------------------------------+
+| Änderung Aktivierungsfkt. A und Funktion Z | :math:`dZ^{\text{[l]}}, dA^{\text{[l]}} : (n^{\text{[l]}},m)` |
++--------------------------------------------+---------------------------------------------------------------+

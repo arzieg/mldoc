@@ -197,7 +197,7 @@ Backward Propagation
     | :math:`dW^{[1]}=\frac{1}{m}dZ^{[1]}X^{T}`
     | :math:`db^{[1]}=\frac{1}{m}np.sum(dZ^{[1]}, axis=1, keepdims=true)`
 
-Initialisierung dues NN
+Initialisierung des NN
 =======================
 Bei der Initialisierung des NN ist die Matrix W und der Vektor b mit Werten vorzubelegen. Man kann zeigen, dass
 b ein Null-Vektor sein kann, W sollte aber mit Zufallszahlen initialisiert werden. Wenn W ebenfalls eine Null-Matrix
@@ -210,5 +210,4 @@ Um hier eine hohe Variabilität zu haben, sollten die Werte für W -1 < w < 1 se
 | :math:`w^{[1]}=np.random.rand(2,2)*0.01` (anstelle von 0.01 kann auch ein anderer kleiner Wert genommen werden).
 | :math:`w^{[2]}=np.random.rand(1,2)*0.01` (anstelle von 0.01 kann auch ein anderer kleiner Wert genommen werden).
 
-
-
+Video38

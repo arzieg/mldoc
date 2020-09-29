@@ -62,6 +62,12 @@ Ein hochgestelltes [l] beschreibt den l<sup>th</sup> layer.</p>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(n ^{\text{[l]}}_{\text{h}}\)</span></p></td>
 <td><p>Anzahl der Hidden Einheiten im l-ten Layer</p></td>
 </tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(a ^{\text{[l]}}\)</span></p></td>
+<td><p>Aktivierungsfunktionen im Layer l</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(w ^{\text{[l]}}\)</span></p></td>
+<td><p>Gewichtungen im Layer l</p></td>
+</tr>
 <tr class="row-odd"><td colspan="2"><p>In einer for - Schleife ist auch folgende Schreibweise möglich
 <span class="math notranslate nohighlight">\(n_x = n ^{\text{[0]}}_{\text{h}}\)</span> und
 <span class="math notranslate nohighlight">\(n_y = n ^{\text{[number of layers + 1]}}_{\text{h}}\)</span></p></td>
@@ -111,6 +117,41 @@ g^{[l]}(z ^{[l]}_j)\)</span></div>
 <div class="line"><span class="math notranslate nohighlight">\(J_1(\hat y,y) = \sum ^{m}_{i=0} \; | y ^{(i)} \; - \; \hat y^{(i)}|\)</span></div>
 </div>
 <p>Zurück zu <a class="reference internal" href="#notation"><span class="std std-ref">Notationen</span></a></p>
+</div>
+<div class="section" id="matrixdimensionen">
+<h3>Matrixdimensionen<a class="headerlink" href="#matrixdimensionen" title="Link zu dieser Überschrift">¶</a></h3>
+<p>Bei der Berechnung eines NN vektorisiert man die einzelnen Variablen im Modell. Beim Debuggen ist es hilfreich,
+wenn die Dimensionen der Matritzen je Layer bekannt sind.</p>
+<p>Es gilt:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 59%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Vektor</strong></p></td>
+<td><p><strong>Matrixdimension je Layer</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Gewichtungsfaktor w</p></td>
+<td><p><span class="math notranslate nohighlight">\(w ^{\text{[l]}} : (n^{\text{[l]}},n^{\text{[l-1]}})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Änderung von Gewichtungsfaktor w</p></td>
+<td><p><span class="math notranslate nohighlight">\(dw ^{\text{[l]}} : (n^{\text{[l]}},n^{\text{[l-1]}})\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bias b</p></td>
+<td><p><span class="math notranslate nohighlight">\(b^{\text{[l]}} : (b^{\text{[l]}},1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Änderung von bias b</p></td>
+<td><p><span class="math notranslate nohighlight">\(db^{\text{[l]}} : (b^{\text{[l]}},1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Aktivierungsfkt. A und Funktion Z</p></td>
+<td><p><span class="math notranslate nohighlight">\(Z^{\text{[l]}}, A^{\text{[l]}} : (n^{\text{[l]}},m)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Änderung Aktivierungsfkt. A und Funktion Z</p></td>
+<td><p><span class="math notranslate nohighlight">\(dZ^{\text{[l]}}, dA^{\text{[l]}} : (n^{\text{[l]}},m)\)</span></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
