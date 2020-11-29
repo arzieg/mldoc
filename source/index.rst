@@ -11,9 +11,10 @@ Welcome to ML Mitschriften's documentation!
    :caption: Contents:
 
    Notationen <notation>
-   Maschinelearning Typen <mltypes>
+   Machinelearning Typen <mltypes>
    Supervised Learning <supervisedlearning>
    Neuronale Netzwerke <nn_basic>
+   Deep Learning Modellanpassungen <dlanpassungen>
 
 
 
