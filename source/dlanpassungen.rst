@@ -23,5 +23,23 @@ The bias–variance decomposition is a way of analyzing a learning algorithm's e
 
 .. _Bias Variance TradeOff: https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff
 
+Beispiel:
+*Quelle: Andrew Ng, Coursera, Improving Deep Learning*
+
+.. _dl_01_Bias_Varianz:
+
+.. figure:: pic/dl_01_Bias_Varianz.png
+    :scale: 100%
+    :alt: Bias / Varianz
+    :align: center
+
+    :numref:`Bias Varianz (Abb. %s)  <dl_01_Bias_Varianz>`
+
+* links: Beispiel für ein hohes Bias. Hohe Fehlerrate bei den vorhergesagten Werten (Underfitting)
+* rechts: Beispiel für eine hohe Varianz. Das Modell auf Basis der Trainingsdaten ist zu spezifisch, so dass das Modell
+  schlecht an den realen Daten skalieren kann. (Overfitting)
+* Mitte: optimaler Beziehung zw. Fehlern auf der einen Seite und Komplexität des Modells auf der anderen Seite.
+
+
 Zurück zu :ref:`dlanpassungen`
 
