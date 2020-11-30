@@ -63,7 +63,72 @@ The bias–variance decomposition is a way of analyzing a learning algorithm’s
 schlecht an den realen Daten skalieren kann. (Overfitting)</p></li>
 <li><p>Mitte: optimaler Beziehung zw. Fehlern auf der einen Seite und Komplexität des Modells auf der anderen Seite.</p></li>
 </ul>
+<p>Beispiel für die Beurteilung <sup>*)</sup>:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 22%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 18%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td></td>
+<td colspan="4"><p><strong>Fehlerrate</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Test-Set</p></td>
+<td><p>1%</p></td>
+<td><p>15%</p></td>
+<td><p>15%</p></td>
+<td><p>0.5%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Development-Set</p></td>
+<td><p>11%</p></td>
+<td><p>16%</p></td>
+<td><p>30%</p></td>
+<td><p>1%</p></td>
+</tr>
+<tr class="row-even"><td><p>Beurteilung</p></td>
+<td><p>overfitting,
+hohe Varianz</p></td>
+<td><p>underfitting,
+High Bias</p></td>
+<td><p>high bias,
+high variance</p></td>
+<td><p>low bias,
+low variance</p></td>
+</tr>
+</tbody>
+</table>
+<p><sup>*)</sup>: Alle Werte werden in Relation zu einer Fehlerrate beim Menschen beurteilt, in diesem Fall liegt dieser bei
+annnährend 0% (auch Bayes Fehler genannt)</p>
 <p>Zurück zu <a class="reference internal" href="#dlanpassungen"><span class="std std-ref">Deep Learning Modellanpassungen</span></a></p>
+</div>
+<div class="section" id="basisprozess-im-machinelearning">
+<h2>Basisprozess im Machinelearning<a class="headerlink" href="#basisprozess-im-machinelearning" title="Link zu dieser Überschrift">¶</a></h2>
+<div class="figure align-center" id="id2">
+<span id="dl-01-basis-ml-process"></span><a class="reference internal image-reference" href="_images/dl_01_basis_ml_process.png"><img alt="Basis ML Prozess" src="_images/dl_01_basis_ml_process.png" style="width: 561.5px; height: 397.0px;" /></a>
+<p class="caption"><span class="caption-number">Abb. 7: </span><span class="caption-text"><a class="reference internal" href="#dl-01-basis-ml-process"><span class="std std-numref">Basis ML Prozess (Abb. 7)</span></a></span><a class="headerlink" href="#id2" title="Link zu diesem Bild">¶</a></p>
+</div>
+<p>Zurück zu <a class="reference internal" href="#dlanpassungen"><span class="std std-ref">Deep Learning Modellanpassungen</span></a></p>
+</div>
+<div class="section" id="regularization">
+<h2>Regularization<a class="headerlink" href="#regularization" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Über „Regularization“ kann Einfluss auf Bias und Varianz genommen werden.</p>
+<div class="section" id="regularization-in-logistic-regression">
+<h3>Regularization in Logistic Regression<a class="headerlink" href="#regularization-in-logistic-regression" title="Link zu dieser Überschrift">¶</a></h3>
+<p>Ziel is die Minimierung der Funktion J(w,b)</p>
+<p><span class="math notranslate nohighlight">\(min(w,b) \rightarrow J(w,b)\)</span></p>
+<p>Man addiert die Regularization zur Funktion. Unterschieden wird zwischen L1 und L2 Regularization, L2 wird
+typischerweise verwendet.</p>
+<p><span class="math notranslate nohighlight">\(L_{2}\)</span> Regularization = <span class="math notranslate nohighlight">\(\|w\|^{2}_{2}=\sum^{N_x}_{j=1}w^{2}_{j}=w^{T}w\)</span></p>
+<p>Daraus folgt für die zu minimierende Funktion:
+<span class="math notranslate nohighlight">\(J(w,b)=\frac{1}{m} \sum^{m}_{i=1}L(\hat y^{(i)}, y^{(i)})+ \frac{\lambda}{2m}\|w\|^{2}_{2}\)</span></p>
+<p>Der Vollständigkeit halber:
+<span class="math notranslate nohighlight">\(L_{1}\)</span> Regularization = <span class="math notranslate nohighlight">\(\frac{\lambda}{2m}\sum^{N_x}_{i=1}|w|=\frac{\lambda}{2m}\|w\|_{1}\)</span></p>
+<p>w ist ein Vektor mit vielen Nullen, damit kann das Modell komprimiert werden (dies ist in der Praxis eher nachrangig)</p>
+<p><span class="math notranslate nohighlight">\(\lambda=\)</span> ist ein Regularization Parameter und kann ebenfalls angepasst werden.</p>
+</div>
 </div>
 </div>
 
@@ -92,6 +157,8 @@ schlecht an den realen Daten skalieren kann. (Overfitting)</p></li>
 <li class="toctree-l1"><a class="reference internal" href="nn_basic.html">Neuronale Netzwerke</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Deep Learning Modellanpassungen</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#bias-varianz">Bias / Varianz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basisprozess-im-machinelearning">Basisprozess im Machinelearning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#regularization">Regularization</a></li>
 </ul>
 </li>
 </ul>

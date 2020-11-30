@@ -40,6 +40,65 @@ Beispiel:
   schlecht an den realen Daten skalieren kann. (Overfitting)
 * Mitte: optimaler Beziehung zw. Fehlern auf der einen Seite und Komplexität des Modells auf der anderen Seite.
 
+Beispiel für die Beurteilung :sup:`*)`:
+
++------------------+------------------------------------------------------------------------+
+|                  | **Fehlerrate**                                                         |
++------------------+-------------------+-----------------+-----------------+----------------+
+|Test-Set          |     1%            |  15%            |  15%            |   0.5%         |
++------------------+-------------------+-----------------+-----------------+----------------+
+|Development-Set   |     11%           |  16%            |  30%            |   1%           |
++------------------+-------------------+-----------------+-----------------+----------------+
+|Beurteilung       |   overfitting,    |  underfitting,  |  high bias,     |   low bias,    |
+|                  |   hohe Varianz    |  High Bias      |  high variance  |   low variance |
++------------------+-------------------+-----------------+-----------------+----------------+
+
+:sup:`*)`: Alle Werte werden in Relation zu einer Fehlerrate beim Menschen beurteilt, in diesem Fall liegt dieser bei
+annnährend 0% (auch Bayes Fehler genannt)
+
 
 Zurück zu :ref:`dlanpassungen`
+
+Basisprozess im Machinelearning
+********************************
+
+.. _dl_01_basis_ml_process:
+
+.. figure:: pic/dl_01_basis_ml_process.png
+    :scale: 50%
+    :alt: Basis ML Prozess
+    :align: center
+
+    :numref:`Basis ML Prozess (Abb. %s)  <dl_01_basis_ml_process>`
+
+
+Zurück zu :ref:`dlanpassungen`
+
+Regularization
+********************************
+Über "Regularization" kann Einfluss auf Bias und Varianz genommen werden.
+
+Regularization in Logistic Regression
+======================================
+Ziel is die Minimierung der Funktion J(w,b)
+
+:math:`min(w,b) \rightarrow J(w,b)`
+
+Man addiert die Regularization zur Funktion. Unterschieden wird zwischen L1 und L2 Regularization, L2 wird
+typischerweise verwendet.
+
+:math:`L_{2}` Regularization = :math:`\|w\|^{2}_{2}=\sum^{N_x}_{j=1}w^{2}_{j}=w^{T}w`
+
+Daraus folgt für die zu minimierende Funktion:
+:math:`J(w,b)=\frac{1}{m} \sum^{m}_{i=1}L(\hat y^{(i)}, y^{(i)})+ \frac{\lambda}{2m}\|w\|^{2}_{2}`
+
+Der Vollständigkeit halber:
+:math:`L_{1}` Regularization = :math:`\frac{\lambda}{2m}\sum^{N_x}_{i=1}|w|=\frac{\lambda}{2m}\|w\|_{1}`
+
+w ist ein Vektor mit vielen Nullen, damit kann das Modell komprimiert werden (dies ist in der Praxis eher nachrangig)
+
+:math:`\lambda=` ist ein Regularization Parameter und kann ebenfalls angepasst werden.
+
+
+
 
