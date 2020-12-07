@@ -101,23 +101,87 @@ w ist ein Vektor mit vielen Nullen, damit kann das Modell komprimiert werden (di
 
 Regularization in Neuronalen Netzwerken
 =======================================
-Analog dem Vorgehen aus der logistic regularization, ergibt sich für ein NN:
+Analog dem Vorgehen aus der Regularization logistic regression ergibt sich für ein NN:
 
 :math:`J(w^{[1]},b^{[1]},...,w^{[i]},b^{[i]}) = \frac{1}{m} \sum^{m}_{i=1}L(\hat y^{(i)}, y^{(i)})+
 \frac{\lambda}{2m} \sum^{L}_{l=1}\|w^{[l]}\|^{2}_{F}`
 
 wobei :math:`\|w^{[l]}\|^{2}=\sum^{n^{[l-1]}}_{i=1} \sum^{n^{[l]}}_{j=1}(w^{[l]}_{ij})^{2}`
 
-:math:`w: (n^{[l]},n^{[l-1]})` und w ist die Matrix mit den Dimensionen der Hidden Layer n und n-1.
+:math:`w: (n^{[l]},n^{[l-1]})` ist die Matrix mit den Dimensionen der Hidden Layer n und n-1.
 
 Man spricht hier nicht von der L2 Regularization sondern von der "Frobenius norm". Dies wird in der obigen Gleichung
 durch ein runtergestelltes F dargestellt.
 
 Implementierung von Gradient Descent in dieses Modell:
 
-:math:`dw^{[l]} = (from backpropagation)+\frac{\lambda}{m}w^{[l]}`
+(1): :math:`dw^{[l]} = (from \: backpropagation)+\frac{\lambda}{m}w^{[l]}`
 
-:math:`w^{[l]}=w{[l]}-\alpha \: dw^{[l]}`
+Für :math:`w^{l}` gilt (2): :math:`w^{[l]}=w{[l]}-\alpha \: dw^{[l]}`
+
+Setzt man (1) in (2) ergibt sich:
+
+:math:`w^{[l]} = w^{[l]}-\alpha[(from \: backpropagation)+\frac{\lambda}{m}w^{[l]}]`
+
+:math:`w^{[l]} = w^{[l]}-\frac{\alpha \lambda}{m}w^{[l]}-\alpha(from \: backpropagation)`
+
+Dies kann man vereinfachen, zieht man auf der rechten Seite die Matrix w vor die Klammer, dann ergibt sich daraus,
+dass von der w-Matrix jeweils der Wert :math:`(1-\frac{\alpha \lambda}{m})` abgezogen wird.
+
+Dropout
+=========
+Dropout ist eine andere Form der Regularization. Beim Dropout geht man durch jeden Layer und "löscht" Knoten auf Basis
+von Wahrscheinlichkeiten. Beispielsweise wird je Layer einer Wahrscheinlichkeit von 0.5 ein Knoten je Layer
+eleminiert. Man löscht dann die Verbindung zu dem Knoten. Das so verkleinerte NN ist weniger Komplex und kann schneller
+berechnet werden.
+
+.. graphviz::
+
+    digraph {
+        rankdir=LR;
+        "x1" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "x2" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "x3" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "x4" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "a11" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true  ] ;
+        "a12" [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true   ] ;
+        "a13" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "a14" [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true   ] ;
+        "a21" [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true  ] ;
+        "a22" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "a23" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "a24" [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true   ] ;
+        "a31" [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true  ] ;
+        "a32" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "a33" [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true   ] ;
+        "a34" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "a4" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "y" [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+        "x1" -> "a11";
+        "x1" -> "a13";
+        "x2" -> "a11";
+        "x2" -> "a13";
+        "x3" -> "a11";
+        "x3" -> "a13";
+        "x4" -> "a11";
+        "x4" -> "a13";
+        "a11" -> "a22";
+        "a11" -> "a23";
+        "a13" -> "a22";
+        "a13" -> "a23";
+        "a22" -> "a32";
+        "a22" -> "a34";
+        "a23" -> "a32";
+        "a23" -> "a34";
+        "a32" -> "a4";
+        "a34" -> "a4";
+        "a4" -> "y";
+        { rank=same; "x1", "x2", "x3", "x4" }
+        { rank=same; "a11", "a12", "a13", "a14" }
+        { rank=same; "a21", "a22", "a23", "a24" }
+        { rank=same; "a31", "a32", "a33", "a34" }
+    }
+
 
 
 

@@ -131,16 +131,72 @@ typischerweise verwendet.</p>
 </div>
 <div class="section" id="regularization-in-neuronalen-netzwerken">
 <h3>Regularization in Neuronalen Netzwerken<a class="headerlink" href="#regularization-in-neuronalen-netzwerken" title="Link zu dieser Überschrift">¶</a></h3>
-<p>Analog dem Vorgehen aus der logistic regularization, ergibt sich für ein NN:</p>
+<p>Analog dem Vorgehen aus der Regularization logistic regression ergibt sich für ein NN:</p>
 <p><span class="math notranslate nohighlight">\(J(w^{[1]},b^{[1]},...,w^{[i]},b^{[i]}) = \frac{1}{m} \sum^{m}_{i=1}L(\hat y^{(i)}, y^{(i)})+
 \frac{\lambda}{2m} \sum^{L}_{l=1}\|w^{[l]}\|^{2}_{F}\)</span></p>
 <p>wobei <span class="math notranslate nohighlight">\(\|w^{[l]}\|^{2}=\sum^{n^{[l-1]}}_{i=1} \sum^{n^{[l]}}_{j=1}(w^{[l]}_{ij})^{2}\)</span></p>
-<p><span class="math notranslate nohighlight">\(w: (n^{[l]},n^{[l-1]})\)</span> und w ist die Matrix mit den Dimensionen der Hidden Layer n und n-1.</p>
+<p><span class="math notranslate nohighlight">\(w: (n^{[l]},n^{[l-1]})\)</span> ist die Matrix mit den Dimensionen der Hidden Layer n und n-1.</p>
 <p>Man spricht hier nicht von der L2 Regularization sondern von der „Frobenius norm“. Dies wird in der obigen Gleichung
 durch ein runtergestelltes F dargestellt.</p>
 <p>Implementierung von Gradient Descent in dieses Modell:</p>
-<p><span class="math notranslate nohighlight">\(dw^{[l]} = (from backpropagation)+\frac{\lambda}{m}w^{[l]}\)</span></p>
-<p><span class="math notranslate nohighlight">\(w^{[l]}=w{[l]}-\alpha \: dw^{[l]}\)</span></p>
+<p>(1): <span class="math notranslate nohighlight">\(dw^{[l]} = (from \: backpropagation)+\frac{\lambda}{m}w^{[l]}\)</span></p>
+<p>Für <span class="math notranslate nohighlight">\(w^{l}\)</span> gilt (2): <span class="math notranslate nohighlight">\(w^{[l]}=w{[l]}-\alpha \: dw^{[l]}\)</span></p>
+<p>Setzt man (1) in (2) ergibt sich:</p>
+<p><span class="math notranslate nohighlight">\(w^{[l]} = w^{[l]}-\alpha[(from \: backpropagation)+\frac{\lambda}{m}w^{[l]}]\)</span></p>
+<p><span class="math notranslate nohighlight">\(w^{[l]} = w^{[l]}-\frac{\alpha \lambda}{m}w^{[l]}-\alpha(from \: backpropagation)\)</span></p>
+<p>Dies kann man vereinfachen, zieht man auf der rechten Seite die Matrix w vor die Klammer, dann ergibt sich daraus,
+dass von der w-Matrix jeweils der Wert <span class="math notranslate nohighlight">\((1-\frac{\alpha \lambda}{m})\)</span> abgezogen wird.</p>
+</div>
+<div class="section" id="dropout">
+<h3>Dropout<a class="headerlink" href="#dropout" title="Link zu dieser Überschrift">¶</a></h3>
+<p>Dropout ist eine andere Form der Regularization. Beim Dropout geht man durch jeden Layer und „löscht“ Knoten auf Basis
+von Wahrscheinlichkeiten. Beispielsweise wird je Layer einer Wahrscheinlichkeit von 0.5 ein Knoten je Layer
+eleminiert. Man löscht dann die Verbindung zu dem Knoten. Das so verkleinerte NN ist weniger Komplex und kann schneller
+berechnet werden.</p>
+<div class="graphviz"><img src="_images/graphviz-8cb6ba718db0677ab4d91838f97790c250b044fd.png" alt="digraph {
+    rankdir=LR;
+    &quot;x1&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;x2&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;x3&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;x4&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a11&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true  ] ;
+    &quot;a12&quot; [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true   ] ;
+    &quot;a13&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a14&quot; [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true   ] ;
+    &quot;a21&quot; [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true  ] ;
+    &quot;a22&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a23&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a24&quot; [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true   ] ;
+    &quot;a31&quot; [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true  ] ;
+    &quot;a32&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a33&quot; [shape=circle  , regular=1,style=filled,fillcolor=red, width=.5, fixedsize=true   ] ;
+    &quot;a34&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;a4&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;y&quot; [shape=circle  , regular=1,style=filled,fillcolor=white, width=.5, fixedsize=true   ] ;
+    &quot;x1&quot; -&gt; &quot;a11&quot;;
+    &quot;x1&quot; -&gt; &quot;a13&quot;;
+    &quot;x2&quot; -&gt; &quot;a11&quot;;
+    &quot;x2&quot; -&gt; &quot;a13&quot;;
+    &quot;x3&quot; -&gt; &quot;a11&quot;;
+    &quot;x3&quot; -&gt; &quot;a13&quot;;
+    &quot;x4&quot; -&gt; &quot;a11&quot;;
+    &quot;x4&quot; -&gt; &quot;a13&quot;;
+    &quot;a11&quot; -&gt; &quot;a22&quot;;
+    &quot;a11&quot; -&gt; &quot;a23&quot;;
+    &quot;a13&quot; -&gt; &quot;a22&quot;;
+    &quot;a13&quot; -&gt; &quot;a23&quot;;
+    &quot;a22&quot; -&gt; &quot;a32&quot;;
+    &quot;a22&quot; -&gt; &quot;a34&quot;;
+    &quot;a23&quot; -&gt; &quot;a32&quot;;
+    &quot;a23&quot; -&gt; &quot;a34&quot;;
+    &quot;a32&quot; -&gt; &quot;a4&quot;;
+    &quot;a34&quot; -&gt; &quot;a4&quot;;
+    &quot;a4&quot; -&gt; &quot;y&quot;;
+    { rank=same; &quot;x1&quot;, &quot;x2&quot;, &quot;x3&quot;, &quot;x4&quot; }
+    { rank=same; &quot;a11&quot;, &quot;a12&quot;, &quot;a13&quot;, &quot;a14&quot; }
+    { rank=same; &quot;a21&quot;, &quot;a22&quot;, &quot;a23&quot;, &quot;a24&quot; }
+    { rank=same; &quot;a31&quot;, &quot;a32&quot;, &quot;a33&quot;, &quot;a34&quot; }
+}" class="graphviz" /></div>
 </div>
 </div>
 </div>
