@@ -117,7 +117,7 @@ annnährend 0% (auch Bayes Fehler genannt)</p>
 <p>Über „Regularization“ kann Einfluss auf Bias und Varianz genommen werden.</p>
 <div class="section" id="regularization-in-logistic-regression">
 <h3>Regularization in Logistic Regression<a class="headerlink" href="#regularization-in-logistic-regression" title="Link zu dieser Überschrift">¶</a></h3>
-<p>Ziel is die Minimierung der Funktion J(w,b)</p>
+<p>Ziel ist die Minimierung der Funktion J(w,b)</p>
 <p><span class="math notranslate nohighlight">\(min(w,b) \rightarrow J(w,b)\)</span></p>
 <p>Man addiert die Regularization zur Funktion. Unterschieden wird zwischen L1 und L2 Regularization, L2 wird
 typischerweise verwendet.</p>
@@ -128,6 +128,19 @@ typischerweise verwendet.</p>
 <span class="math notranslate nohighlight">\(L_{1}\)</span> Regularization = <span class="math notranslate nohighlight">\(\frac{\lambda}{2m}\sum^{N_x}_{i=1}|w|=\frac{\lambda}{2m}\|w\|_{1}\)</span></p>
 <p>w ist ein Vektor mit vielen Nullen, damit kann das Modell komprimiert werden (dies ist in der Praxis eher nachrangig)</p>
 <p><span class="math notranslate nohighlight">\(\lambda=\)</span> ist ein Regularization Parameter und kann ebenfalls angepasst werden.</p>
+</div>
+<div class="section" id="regularization-in-neuronalen-netzwerken">
+<h3>Regularization in Neuronalen Netzwerken<a class="headerlink" href="#regularization-in-neuronalen-netzwerken" title="Link zu dieser Überschrift">¶</a></h3>
+<p>Analog dem Vorgehen aus der logistic regularization, ergibt sich für ein NN:</p>
+<p><span class="math notranslate nohighlight">\(J(w^{[1]},b^{[1]},...,w^{[i]},b^{[i]}) = \frac{1}{m} \sum^{m}_{i=1}L(\hat y^{(i)}, y^{(i)})+
+\frac{\lambda}{2m} \sum^{L}_{l=1}\|w^{[l]}\|^{2}_{F}\)</span></p>
+<p>wobei <span class="math notranslate nohighlight">\(\|w^{[l]}\|^{2}=\sum^{n^{[l-1]}}_{i=1} \sum^{n^{[l]}}_{j=1}(w^{[l]}_{ij})^{2}\)</span></p>
+<p><span class="math notranslate nohighlight">\(w: (n^{[l]},n^{[l-1]})\)</span> und w ist die Matrix mit den Dimensionen der Hidden Layer n und n-1.</p>
+<p>Man spricht hier nicht von der L2 Regularization sondern von der „Frobenius norm“. Dies wird in der obigen Gleichung
+durch ein runtergestelltes F dargestellt.</p>
+<p>Implementierung von Gradient Descent in dieses Modell:</p>
+<p><span class="math notranslate nohighlight">\(dw^{[l]} = (from backpropagation)+\frac{\lambda}{m}w^{[l]}\)</span></p>
+<p><span class="math notranslate nohighlight">\(w^{[l]}=w{[l]}-\alpha \: dw^{[l]}\)</span></p>
 </div>
 </div>
 </div>

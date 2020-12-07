@@ -80,7 +80,7 @@ Regularization
 
 Regularization in Logistic Regression
 ======================================
-Ziel is die Minimierung der Funktion J(w,b)
+Ziel ist die Minimierung der Funktion J(w,b)
 
 :math:`min(w,b) \rightarrow J(w,b)`
 
@@ -98,6 +98,26 @@ Der Vollständigkeit halber:
 w ist ein Vektor mit vielen Nullen, damit kann das Modell komprimiert werden (dies ist in der Praxis eher nachrangig)
 
 :math:`\lambda=` ist ein Regularization Parameter und kann ebenfalls angepasst werden.
+
+Regularization in Neuronalen Netzwerken
+=======================================
+Analog dem Vorgehen aus der logistic regularization, ergibt sich für ein NN:
+
+:math:`J(w^{[1]},b^{[1]},...,w^{[i]},b^{[i]}) = \frac{1}{m} \sum^{m}_{i=1}L(\hat y^{(i)}, y^{(i)})+
+\frac{\lambda}{2m} \sum^{L}_{l=1}\|w^{[l]}\|^{2}_{F}`
+
+wobei :math:`\|w^{[l]}\|^{2}=\sum^{n^{[l-1]}}_{i=1} \sum^{n^{[l]}}_{j=1}(w^{[l]}_{ij})^{2}`
+
+:math:`w: (n^{[l]},n^{[l-1]})` und w ist die Matrix mit den Dimensionen der Hidden Layer n und n-1.
+
+Man spricht hier nicht von der L2 Regularization sondern von der "Frobenius norm". Dies wird in der obigen Gleichung
+durch ein runtergestelltes F dargestellt.
+
+Implementierung von Gradient Descent in dieses Modell:
+
+:math:`dw^{[l]} = (from backpropagation)+\frac{\lambda}{m}w^{[l]}`
+
+:math:`w^{[l]}=w{[l]}-\alpha \: dw^{[l]}`
 
 
 
