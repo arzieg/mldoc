@@ -15,6 +15,7 @@ Welcome to ML Mitschriften's documentation!
    Supervised Learning <supervisedlearning>
    Neuronale Netzwerke <nn_basic>
    Deep Learning Modellanpassungen <dlanpassungen>
+   Deep Learning Notes <deeplearningnotes>
 
 
 
